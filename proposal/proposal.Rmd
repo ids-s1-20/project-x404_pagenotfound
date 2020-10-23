@@ -9,6 +9,12 @@ library(tidyverse)
 library(broom)
 ```
 
+```{r read-in-data, message=FALSE}
+read.csv
+
+```
+
+
 ## 1. Introduction
 
 
