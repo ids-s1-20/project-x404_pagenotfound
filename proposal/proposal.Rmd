@@ -1,6 +1,6 @@
 ---
 title: "Project proposal"
-author: "Team name"
+author: "x404-pagenotfound"
 output: github_document
 ---
 
@@ -10,7 +10,9 @@ library(broom)
 ```
 
 ```{r read-in-data, message=FALSE}
-read.csv
+volcano <- read_csv("data/volcano.csv")
+eruptions <- read_csv("data/eruptions.csv")
+events <- read_csv("data/events.csv")
 
 ```
 
