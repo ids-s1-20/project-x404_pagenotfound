@@ -2,11 +2,14 @@
 title: "Project proposal"
 author: "x404-pagenotfound"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+library(janitor)
 ```
 
 ```{r read-in-data, message=FALSE}
@@ -14,7 +17,12 @@ volcano <- read_csv("data/volcano.csv")
 eruptions <- read_csv("data/eruptions.csv")
 events <- read_csv("data/events.csv")
 
+glimpse(volcano)
+glimpse(eruptions)
+## find out what vei column means
+glimpse(events)
 ```
+
 
 
 ## 1. Introduction
