@@ -20,6 +20,7 @@ events <- read_csv("data/events.csv")
 
 ```
 
+![volcanopic](images/volcano.jpg)
 
 
 ## 1. Introduction
@@ -43,20 +44,32 @@ glimpse(events)
 
 
 ## 3. Data analysis plan
-```{r initial-plot}
-
-```
-
 ```{r create-start-end-date}
-eruptions %>%
+eruptions2 <- eruptions %>%
   mutate(
-    start_date = glue("{start_year}{start_month}{start_day}"),
-    end_date = glue("{end_year}{end_month}{end_day}")
-    ) %>%
-  ggplot(aes(y=start_date)) +
-  geom_bar()
-  
+    start_date = as.Date(glue("{start_year}-{start_month}-{start_day}")),
+    end_date = as.Date(glue("{end_year}-{end_month}-{end_day}")),
+    length_eruptions = end_date - start_date
+    )
+
+
 ```
+Since the data for end_date turned out to be mostly NAs, out initial plot will plot number of eruptions vs year and will be grouped by tectonic_setting. We will explore the factors that affect length of eruption once we have sorted out the NA problem.
+
+```{r}
+#eruptions2$length_eruptions[is.na(eruptions2$end_year)]=1
+volcanic_eruption <- left_join(volcano, eruptions2, by="volcano_number")
+
+volcanic_eruption %>%
+  filter(start_year>1500) %>%
+  group_by(tectonic_settings, start_year) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x=start_year, y=count, color=tectonic_settings)) +
+    geom_line(alpha=0.5) +
+    labs(y="number of events per year")
+```
+
+Our interest is in the spatial-temporal evolution of eruptions, and our initial exploration shows a steep increase in certain tectonic activities and not for some others. In the future we will try and add a geographical component
 ##library(lubridate)
 ##with(df1, ymd_h(paste(year, month, day, hour, sep= ' ')))
 
@@ -71,16 +84,6 @@ We plan to investigate the following factors:
 - we plan on investigating more aswell
 
 The data is observational so we don't need a comparison group because this is the case we are only finding correlations in the data not causations, and any correlation established would need to be followed up by an experimental study.
-
-```{r length-of-eruption}
-eruptions %>%
-  mutate(
-    start_date = glue("{start_year}{start_month}{start_day}"),
-    end_date = glue("{end_year}{end_month}{end_day}"),
-    #length_eruption = difftime(end_date, start_date)
-    )
-#View(eruptions)
-```
 
 
 Very preliminary exploratory data analysis, including some summary statistics and visualizations, along with some explanation on how they help you learn more about your data. (You can add to these later as you work on your project.)

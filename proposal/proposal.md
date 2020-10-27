@@ -15,14 +15,17 @@ eruptions <- read_csv("data/eruptions.csv")
 events <- read_csv("data/events.csv")
 ```
 
+![volcanopic](images/volcano.jpg)
+
 ## 1\. Introduction
 
-## The introduction should introduce your general research question and your data (where it came from, how it was collected, what are the cases, what are the variables, etc.).
+## What factors affect the length of eruptions?
 
 As a team we choose to use the Volcano Eruptions data set from the
 tidytuesday package for our package, due to the interesting nature of
 the data, the number of observations, and the variety and number of
-variables.
+variables. We have decided our research will focus on the factors that
+could influence the length of volcano eruptions.
 
 The data in the Volcano eruption dataset comes from the Smithsonian
 Institution’s Global Volcanism Program (GVP), which reports on the
@@ -36,9 +39,9 @@ volcanoes, information such as the type of the volcano, where it is
 located and the types of rocks that make up te volcano. In the eruptions
 dataset each observation documents an eruption of one of the earth’s
 volcano, documenting where and when each eruption occurs, as well as the
-eruption type and category.
-
-## 2\. Data
+eruption type and category. At present we are unsure exactly how the
+data was collected as the sources don’t specify but we will continue to
+research how it might have been collected as we progress. \#\# 2. Data
 
 ``` r
 glimpse(volcano)
@@ -120,11 +123,36 @@ eruptions %>%
     start_date = glue("{start_year}{start_month}{start_day}"),
     end_date = glue("{end_year}{end_month}{end_day}")
     ) %>%
-  group_by(start_month)
+  ggplot(aes(y=start_date)) +
+  geom_bar()
+```
+
+![](proposal_files/figure-gfm/create-start-end-date-1.png)<!-- -->
+\#\#library(lubridate) \#\#with(df1, ymd\_h(paste(year, month, day,
+hour, sep= ’ ’)))
+
+Section 3 - Data analysis plan: Our response variable is the length of
+the eruption, and we’ll have various explanatory variables which will be
+the various factors we want to find out if there’s a correlation between
+them and the length of the volcano’s erruption. We plan to investigate
+the following factors: -country -volcano type -techtonic settings -rock
+type -time since last erruption - we plan on investigating more aswell
+
+The data is observational so we don’t need a comparison group because
+this is the case we are only finding correlations in the data not
+causations, and any correlation established would need to be followed up
+by an experimental study.
+
+``` r
+eruptions %>%
+  mutate(
+    start_date = glue("{start_year}{start_month}{start_day}"),
+    end_date = glue("{end_year}{end_month}{end_day}"),
+    #length_eruption = difftime(end_date, start_date)
+    )
 ```
 
     ## # A tibble: 11,178 x 17
-    ## # Groups:   start_month [14]
     ##    volcano_number volcano_name eruption_number eruption_catego… area_of_activity
     ##             <dbl> <chr>                  <dbl> <chr>            <chr>           
     ##  1         266030 Soputan                22354 Confirmed Erupt… <NA>            
@@ -143,22 +171,15 @@ eruptions %>%
     ## #   longitude <dbl>, start_date <glue>, end_date <glue>
 
 ``` r
-view(eruptions)
+#View(eruptions)
 ```
 
-\#\#library(lubridate) \#\#with(df1, ymd\_h(paste(year, month, day,
-hour, sep= ’ ’)))
+Very preliminary exploratory data analysis, including some summary
+statistics and visualizations, along with some explanation on how they
+help you learn more about your data. (You can add to these later as you
+work on your project.)
 
-Section 3 - Data analysis plan:
-
-The outcome (response, Y) and predictor (explanatory, X) variables you
-will use to answer your question. The comparison groups you will use, if
-applicable. Very preliminary exploratory data analysis, including some
-summary statistics and visualizations, along with some explanation on
-how they help you learn more about your data. (You can add to these
-later as you work on your project.) The statistical method(s) that you
-believe will be useful in answering your question(s). (You can update
-these later as you work on your project.) What results from these
-specific statistical methods are needed to support your hypothesized
-answer? –avg length eruption –avg length time between eruptions –which
-volcanos erupt most often –\> by tectonic plate
+At this moment in time we’re planning on using mean values, aswell as
+standard deviation and sample size determination. This will help us
+understands the general trends in our data but also how consistent these
+are. We’ll likley add to this as we develop our knowledge further.
