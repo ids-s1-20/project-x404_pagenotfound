@@ -39,8 +39,6 @@ as their website <https://volcano.si.edu/> states.
 
 ## Need to move data folder back into main project folder
 
-## Need to add dimensions to readme
-
 ``` r
 glimpse(volcano)
 ```
