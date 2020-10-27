@@ -42,13 +42,19 @@ glimpse(events)
 
 
 ## 3. Data analysis plan
+```{r initial-plot}
+
+```
 
 ```{r create-start-end-date}
 eruptions %>%
   mutate(
     start_date = glue("{start_year}{start_month}{start_day}"),
     end_date = glue("{end_year}{end_month}{end_day}")
-    )
+    ) %>%
+  ggplot(aes(y=start_date)) +
+  geom_bar()
+  
 ```
 ##library(lubridate)
 ##with(df1, ymd_h(paste(year, month, day, hour, sep= ' ')))

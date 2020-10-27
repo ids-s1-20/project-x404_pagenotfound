@@ -36,22 +36,9 @@ volcanoes, information such as the type of the volcano, where it is
 located and the types of rocks that make up te volcano. In the eruptions
 dataset each observation documents an eruption of one of the earth’s
 volcano, documenting where and when each eruption occurs, as well as the
-<<<<<<< HEAD
-<<<<<<< HEAD
-eruption type and category. \#\# 2. Data
-=======
-eruption type and category. \#\# 2. Data \#\# Place your data in the
-/data folder, and add dimensions and codebook to the README in that
-folder. Then print out the output of glimpse() or skim() of your data
-frame.
-
-## Need to move data folder back into main project folder
->>>>>>> 620a2a74843d3b5e584188353e732086d38c8530
-=======
 eruption type and category.
 
 ## 2\. Data
->>>>>>> 3bdbeee6a0a705a0950ad455624c3de14e28bc09
 
 ``` r
 glimpse(volcano)
@@ -132,10 +119,12 @@ eruptions %>%
   mutate(
     start_date = glue("{start_year}{start_month}{start_day}"),
     end_date = glue("{end_year}{end_month}{end_day}")
-    )
+    ) %>%
+  group_by(start_month)
 ```
 
     ## # A tibble: 11,178 x 17
+    ## # Groups:   start_month [14]
     ##    volcano_number volcano_name eruption_number eruption_catego… area_of_activity
     ##             <dbl> <chr>                  <dbl> <chr>            <chr>           
     ##  1         266030 Soputan                22354 Confirmed Erupt… <NA>            
@@ -153,5 +142,23 @@ eruptions %>%
     ## #   end_year <dbl>, end_month <dbl>, end_day <dbl>, latitude <dbl>,
     ## #   longitude <dbl>, start_date <glue>, end_date <glue>
 
+``` r
+view(eruptions)
+```
+
 \#\#library(lubridate) \#\#with(df1, ymd\_h(paste(year, month, day,
 hour, sep= ’ ’)))
+
+Section 3 - Data analysis plan:
+
+The outcome (response, Y) and predictor (explanatory, X) variables you
+will use to answer your question. The comparison groups you will use, if
+applicable. Very preliminary exploratory data analysis, including some
+summary statistics and visualizations, along with some explanation on
+how they help you learn more about your data. (You can add to these
+later as you work on your project.) The statistical method(s) that you
+believe will be useful in answering your question(s). (You can update
+these later as you work on your project.) What results from these
+specific statistical methods are needed to support your hypothesized
+answer? –avg length eruption –avg length time between eruptions –which
+volcanos erupt most often –\> by tectonic plate
