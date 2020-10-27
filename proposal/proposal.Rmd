@@ -35,7 +35,7 @@ The data in the Volcano eruption dataset comes from the Smithsonian Institution'
 
 
 ## Need to move data folder back into main project folder
-## Need to add dimensions to readme 
+
 ```{r glimpse-data}
 
 glimpse(volcano)
