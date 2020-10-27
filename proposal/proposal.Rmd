@@ -24,8 +24,6 @@ events <- read_csv("data/events.csv")
 
 ## 1. Introduction
 ## What factors affect the length of eruptions?
-##Does the length of time between eruptions impact on the length of the eruption?
-
 
 As a team we choose to use the Volcano Eruptions data set from the tidytuesday package for our package, due to the interesting nature of the data, the number of observations, and the variety and number of variables. 
 
@@ -63,9 +61,18 @@ eruptions %>%
 ##with(df1, ymd_h(paste(year, month, day, hour, sep= ' ')))
 
 Section 3 - Data analysis plan:
+Our response variable is the length of the eruption, and we'll have various explanatory variables which will be the various factors we want to find out if there's a correlation between them and the length of the volcano's erruption.
+We plan to investigate the following factors:
+-country
+-volcano type
+-techtonic settings
+-rock type
+-time since last erruption
+- we plan on investigating more aswell
 
-The outcome (response, Y) and predictor (explanatory, X) variables you will use to answer your question.
-The comparison groups you will use, if applicable.
+The data is observational so we don't need a comparison group because this is the case we are only finding correlations in the data not causations, and any correlation established would need to be followed up by an experimental study.
+
+
 Very preliminary exploratory data analysis, including some summary statistics and visualizations, along with some explanation on how they help you learn more about your data. (You can add to these later as you work on your project.)
 The statistical method(s) that you believe will be useful in answering your question(s). (You can update these later as you work on your project.)
 What results from these specific statistical methods are needed to support your hypothesized answer? 
