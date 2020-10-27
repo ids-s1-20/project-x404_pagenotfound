@@ -7,6 +7,7 @@ using the following format.
 ## CodeBook contents
 - `variable name` : description of variable
 ## volcano.csv
+## dimensions 958 x 26
 - `volcano_number`: Volcano unique ID
 - `volcano_name`: Volcano name
 - `primary_volcano_type`: Volcano type (see wikipedia above for full details)
@@ -35,6 +36,7 @@ using the following format.
 - `population_within_100_km`:Total population within 100 km of volcano
 
 ## eruptions.csv
+## dimensions 11,178 x 15
 - `volcano_number`: Volcano unique ID
 - `volcano_name`: Volcano name
 - `eruption_number`: 	Eruption number
@@ -52,6 +54,7 @@ using the following format.
 - `longitude`: Longitude
 
 ## events.csv
+## dimensions 41,322 x 10
 - `volcano_number`: Volcano unique ID
 - `volcano_name`: Volcano name
 - `eruption_number`: 	Eruption number

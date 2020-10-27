@@ -12,7 +12,36 @@ library(janitor)
 volcano <- read_csv("data/volcano.csv")
 eruptions <- read_csv("data/eruptions.csv")
 events <- read_csv("data/events.csv")
+```
 
+## 1\. Introduction
+
+## The introduction should introduce your general research question and your data (where it came from, how it was collected, what are the cases, what are the variables, etc.).
+
+As a team we choose to use the Volcano Eruptions data set from the
+tidytuesday package for our package, due to the interesting nature of
+the data, and …. –large data set therefore can answer many data
+analytical questions, variety of variables – large number of both
+observations and variables –mix of both continuous and categorical
+variables
+
+The data in the Volcano eruption dataset comes from the Smithsonian
+Institution’s Global Volcanism Program (GVP), which reports on the
+world’s volcanos, and their eruptions, both current and dating back to
+10,000 years ago. The data was collected from the Volcanos of the World
+database which is maintained by the GVP. The GVP aim “document,
+understand, and disseminate information about global volcanic activity,”
+as their website <https://volcano.si.edu/> states.
+
+## 2\. Data
+
+## Place your data in the /data folder, and add dimensions and codebook to the README in that folder. Then print out the output of glimpse() or skim() of your data frame.
+
+## Need to move data folder back into main project folder
+
+## Need to add dimensions to readme
+
+``` r
 glimpse(volcano)
 ```
 
@@ -83,9 +112,5 @@ glimpse(events)
     ## $ event_date_year     <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
     ## $ event_date_month    <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
     ## $ event_date_day      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-
-## 1\. Introduction
-
-## 2\. Data
 
 ## 3\. Data analysis plan
