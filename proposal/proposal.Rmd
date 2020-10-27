@@ -43,7 +43,7 @@ glimpse(events)
 
 ## 3. Data analysis plan
 
-```{r}
+```{r create-start-end-date}
 eruptions %>%
   mutate(
     start_date = glue("{start_year}{start_month}{start_day}")
@@ -51,5 +51,17 @@ eruptions %>%
 ```
 ##library(lubridate)
 ##with(df1, ymd_h(paste(year, month, day, hour, sep= ' ')))
+
+Section 3 - Data analysis plan:
+
+The outcome (response, Y) and predictor (explanatory, X) variables you will use to answer your question.
+The comparison groups you will use, if applicable.
+Very preliminary exploratory data analysis, including some summary statistics and visualizations, along with some explanation on how they help you learn more about your data. (You can add to these later as you work on your project.)
+The statistical method(s) that you believe will be useful in answering your question(s). (You can update these later as you work on your project.)
+What results from these specific statistical methods are needed to support your hypothesized answer? 
+--avg length eruption
+--avg length time between eruptions
+--which volcanos erupt most often --> by tectonic plate
+
 
 

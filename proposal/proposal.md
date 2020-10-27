@@ -37,7 +37,16 @@ volcanoes, information such as the type of the volcano, where it is
 located and the types of rocks that make up te volcano. In the eruptions
 dataset each observation documents an eruption of one of the earth’s
 volcano, documenting where and when each eruption occurs, as well as the
+<<<<<<< HEAD
 eruption type and category. \#\# 2. Data
+=======
+eruption type and category. \#\# 2. Data \#\# Place your data in the
+/data folder, and add dimensions and codebook to the README in that
+folder. Then print out the output of glimpse() or skim() of your data
+frame.
+
+## Need to move data folder back into main project folder
+>>>>>>> 620a2a74843d3b5e584188353e732086d38c8530
 
 ``` r
 glimpse(volcano)
