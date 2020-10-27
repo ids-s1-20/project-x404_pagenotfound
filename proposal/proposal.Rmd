@@ -46,7 +46,8 @@ glimpse(events)
 ```{r}
 eruptions %>%
   mutate(
-    start_date = glue("{start_year}{start_month}{start_day}")
+    start_date = glue("{start_year}{start_month}{start_day}"),
+    end_date = glue("{end_year}{end_month}{end_day}")
     )
 ```
 ##library(lubridate)
