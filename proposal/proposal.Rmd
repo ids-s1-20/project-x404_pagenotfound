@@ -25,11 +25,11 @@ events <- read_csv("data/events.csv")
 ## 1. Introduction
 ## What factors affect the length of eruptions?
 
-As a team we choose to use the Volcano Eruptions data set from the tidytuesday package for our package, due to the interesting nature of the data, the number of observations, and the variety and number of variables. 
+As a team we choose to use the Volcano Eruptions data set from the tidytuesday package for our package, due to the interesting nature of the data, the number of observations, and the variety and number of variables. We have decided our research will focus on the factors that could influence the length of volcano eruptions.
 
 The data in the Volcano eruption dataset comes from the Smithsonian Institution's Global Volcanism Program (GVP), which reports on the world's volcanos, and their eruptions, both current and dating back to 10,000 years ago. The data was collected from the Volcanos of the World database which is maintained by the GVP. The GVP's aim is to "document, understand, and disseminate information about global volcanic activity," as their website https://volcano.si.edu/ states.
 Each observation in the dataset volcano contains information on one of the earth's volcanoes, information such as the type of the volcano, where it is located and the types of rocks that make up te volcano. In the eruptions dataset each observation documents an eruption of one of the earth's volcano, documenting where and when each eruption occurs, as well as the eruption type and category.
-
+At present we are unsure exactly how the data was collected as the sources don't specify but we will continue to research how it might have been collected as we progress.
 ## 2. Data
 
 
