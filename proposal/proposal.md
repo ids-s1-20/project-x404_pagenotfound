@@ -20,10 +20,9 @@ events <- read_csv("data/events.csv")
 
 As a team we choose to use the Volcano Eruptions data set from the
 tidytuesday package for our package, due to the interesting nature of
-the data, and …. –large data set therefore can answer many data
-analytical questions, variety of variables – large number of both
-observations and variables –mix of both continuous and categorical
-variables
+the data, and …. –large data set therefore can answer many data analytic
+questions, variety of variables – large number of both observations and
+variables –mix of both continuous and categorical variables
 
 The data in the Volcano eruption dataset comes from the Smithsonian
 Institution’s Global Volcanism Program (GVP), which reports on the
@@ -31,11 +30,16 @@ world’s volcanos, and their eruptions, both current and dating back to
 10,000 years ago. The data was collected from the Volcanos of the World
 database which is maintained by the GVP. The GVP aim “document,
 understand, and disseminate information about global volcanic activity,”
-as their website <https://volcano.si.edu/> states.
-
-## 2\. Data
-
-## Place your data in the /data folder, and add dimensions and codebook to the README in that folder. Then print out the output of glimpse() or skim() of your data frame.
+as their website <https://volcano.si.edu/> states. Each observation in
+the dataset volcano contains information on one of the earth’s
+volcanoes, information such as the type of the volcano, where it is
+located and the types of rocks that make up te volcano. In the eruptions
+dataset each observation documents an eruption of one of the earth’s
+volcano, documenting where and when each eruption occurs, as well as the
+eruption type and category. \#\# 2. Data \#\# Place your data in the
+/data folder, and add dimensions and codebook to the README in that
+folder. Then print out the output of glimpse() or skim() of your data
+frame.
 
 ## Need to move data folder back into main project folder
 
