@@ -6,6 +6,7 @@ x404-pagenotfound
 library(tidyverse)
 library(broom)
 library(janitor)
+library(glue)
 ```
 
 ``` r
@@ -20,10 +21,9 @@ events <- read_csv("data/events.csv")
 
 As a team we choose to use the Volcano Eruptions data set from the
 tidytuesday package for our package, due to the interesting nature of
-the data, and …. –large data set therefore can answer many data
-analytical questions, variety of variables – large number of both
-observations and variables –mix of both continuous and categorical
-variables
+the data, and …. –large data set therefore can answer many data analytic
+questions, variety of variables – large number of both observations and
+variables –mix of both continuous and categorical variables
 
 The data in the Volcano eruption dataset comes from the Smithsonian
 Institution’s Global Volcanism Program (GVP), which reports on the
@@ -31,13 +31,13 @@ world’s volcanos, and their eruptions, both current and dating back to
 10,000 years ago. The data was collected from the Volcanos of the World
 database which is maintained by the GVP. The GVP aim “document,
 understand, and disseminate information about global volcanic activity,”
-as their website <https://volcano.si.edu/> states.
-
-## 2\. Data
-
-## Place your data in the /data folder, and add dimensions and codebook to the README in that folder. Then print out the output of glimpse() or skim() of your data frame.
-
-## Need to move data folder back into main project folder
+as their website <https://volcano.si.edu/> states. Each observation in
+the dataset volcano contains information on one of the earth’s
+volcanoes, information such as the type of the volcano, where it is
+located and the types of rocks that make up te volcano. In the eruptions
+dataset each observation documents an eruption of one of the earth’s
+volcano, documenting where and when each eruption occurs, as well as the
+eruption type and category. \#\# 2. Data
 
 ``` r
 glimpse(volcano)
@@ -112,3 +112,31 @@ glimpse(events)
     ## $ event_date_day      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 
 ## 3\. Data analysis plan
+
+``` r
+eruptions %>%
+  mutate(
+    start_date = glue("{start_year}{start_month}{start_day}")
+    )
+```
+
+    ## # A tibble: 11,178 x 16
+    ##    volcano_number volcano_name eruption_number eruption_catego… area_of_activity
+    ##             <dbl> <chr>                  <dbl> <chr>            <chr>           
+    ##  1         266030 Soputan                22354 Confirmed Erupt… <NA>            
+    ##  2         343100 San Miguel             22355 Confirmed Erupt… <NA>            
+    ##  3         233020 Fournaise, …           22343 Confirmed Erupt… <NA>            
+    ##  4         345020 Rincon de l…           22346 Confirmed Erupt… <NA>            
+    ##  5         353010 Fernandina             22347 Confirmed Erupt… <NA>            
+    ##  6         273070 Taal                   22344 Confirmed Erupt… <NA>            
+    ##  7         282050 Kuchinoerab…           22345 Confirmed Erupt… <NA>            
+    ##  8         241040 Whakaari/Wh…           22338 Confirmed Erupt… 1978/90 Crater …
+    ##  9         311060 Semisopochn…           22341 Confirmed Erupt… <NA>            
+    ## 10         284096 Nishinoshima           22340 Confirmed Erupt… <NA>            
+    ## # … with 11,168 more rows, and 11 more variables: vei <dbl>, start_year <dbl>,
+    ## #   start_month <dbl>, start_day <dbl>, evidence_method_dating <chr>,
+    ## #   end_year <dbl>, end_month <dbl>, end_day <dbl>, latitude <dbl>,
+    ## #   longitude <dbl>, start_date <glue>
+
+\#\#library(lubridate) \#\#with(df1, ymd\_h(paste(year, month, day,
+hour, sep= ’ ’)))
