@@ -84,11 +84,6 @@ eruptions %>%
 
 
 Very preliminary exploratory data analysis, including some summary statistics and visualizations, along with some explanation on how they help you learn more about your data. (You can add to these later as you work on your project.)
-The statistical method(s) that you believe will be useful in answering your question(s). (You can update these later as you work on your project.)
-What results from these specific statistical methods are needed to support your hypothesized answer? 
---avg length eruption
---avg length time between eruptions
---which volcanos erupt most often --> by tectonic plate
 
 
-
+At this moment in time we're planning on using mean values, aswell as standard deviation and sample size determination. This will help us understands the general trends in our data but also how consistent these are. We'll likley add to this as we develop our knowledge further.
