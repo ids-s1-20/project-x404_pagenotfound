@@ -1,14 +1,11 @@
-# data
+# Code Book for Data File - Volcanos 
 
-Place data file(s) in this folder.
 
-Then, include codebooks (variables, and their descriptions) for your data file(s)
-using the following format.
-## CodeBook contents
-- `variable name` : description of variable
 ## volcano.csv
-## dimensions 958 x 26
+Volcano data frame has the dimensions - dimensions 958 x 26
+In the volcano data frame, each row represents one of the earths volcanos, containing information on a volcanos name, geographical location, the type of volcano it is and the rock type it consistent of.
 - `volcano_number`: Volcano unique ID
+
 - `volcano_name`: Volcano name
 - `primary_volcano_type`: Volcano type (see wikipedia above for full details)
 -`last_eruption_year` : Last year erupted
@@ -36,8 +33,10 @@ using the following format.
 - `population_within_100_km`:Total population within 100 km of volcano
 
 ## eruptions.csv
-## dimensions 11,178 x 15
+Erruptions data frame has the dimensions - dimensions 11,178 x 15
+In the eruptions data frame each row represents a volcano eruption that has occurred, containing information on what volcano errupted, the type and scale of the erruption, as well as when it strted and finished.
 - `volcano_number`: Volcano unique ID
+
 - `volcano_name`: Volcano name
 - `eruption_number`: 	Eruption number
 - `eruption_category`: Type of eruption
@@ -54,8 +53,10 @@ using the following format.
 - `longitude`: Longitude
 
 ## events.csv
-## dimensions 41,322 x 10
+Events data frame has the dimensions - 41,322 x 10
+In the events data frame each row represents an event which has occured. An event in the context of this dataframe is an erruption of a volcano. Each row contains information on what volcano and erruption the event consists of, as well as when the event occured.
 - `volcano_number`: Volcano unique ID
+
 - `volcano_name`: Volcano name
 - `eruption_number`: 	Eruption number
 - `eruption_start_year`: Eruption start year
