@@ -10,9 +10,9 @@ library(glue)
 ```
 
 ``` r
-volcano <- read_csv("data/volcano.csv")
-eruptions <- read_csv("data/eruptions.csv")
-events <- read_csv("data/events.csv")
+volcano <- read_csv("../data/volcano.csv")
+eruptions <- read_csv("../data/eruptions.csv")
+events <- read_csv("../data/events.csv")
 ```
 
 ![volcanopic](images/volcano.jpg)
@@ -118,18 +118,41 @@ glimpse(events)
 ## 3\. Data analysis plan
 
 ``` r
-eruptions %>%
+eruptions2 <- eruptions %>%
   mutate(
-    start_date = glue("{start_year}{start_month}{start_day}"),
-    end_date = glue("{end_year}{end_month}{end_day}")
-    ) %>%
-  ggplot(aes(y=start_date)) +
-  geom_bar()
+    start_date = as.Date(glue("{start_year}-{start_month}-{start_day}")),
+    end_date = as.Date(glue("{end_year}-{end_month}-{end_day}")),
+    length_eruptions = end_date - start_date
+    )
 ```
 
-![](proposal_files/figure-gfm/create-start-end-date-1.png)<!-- -->
-\#\#library(lubridate) \#\#with(df1, ymd\_h(paste(year, month, day,
-hour, sep= ’ ’)))
+Since the data for end\_date turned out to be mostly NAs, out initial
+plot will plot number of eruptions vs year and will be grouped by
+tectonic\_setting. We will explore the factors that affect length of
+eruption once we have sorted out the NA problem.
+
+``` r
+#eruptions2$length_eruptions[is.na(eruptions2$end_year)]=1
+volcanic_eruption <- left_join(volcano, eruptions2, by="volcano_number")
+
+volcanic_eruption %>%
+  filter(start_year>1500) %>%
+  group_by(tectonic_settings, start_year) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x=start_year, y=count, color=tectonic_settings)) +
+    geom_line(alpha=0.5) +
+    labs(y="number of events per year")
+```
+
+    ## `summarise()` regrouping output by 'tectonic_settings' (override with `.groups` argument)
+
+![](proposal_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+Our interest is in the spatial-temporal evolution of eruptions, and our
+initial exploration shows a steep increase in certain tectonic
+activities and not for some others. In the future we will try and add a
+geographical component \#\#library(lubridate) \#\#with(df1,
+ymd\_h(paste(year, month, day, hour, sep= ’ ’)))
 
 Section 3 - Data analysis plan: Our response variable is the length of
 the eruption, and we’ll have various explanatory variables which will be
@@ -142,37 +165,6 @@ The data is observational so we don’t need a comparison group because
 this is the case we are only finding correlations in the data not
 causations, and any correlation established would need to be followed up
 by an experimental study.
-
-``` r
-eruptions %>%
-  mutate(
-    start_date = glue("{start_year}{start_month}{start_day}"),
-    end_date = glue("{end_year}{end_month}{end_day}"),
-    #length_eruption = difftime(end_date, start_date)
-    )
-```
-
-    ## # A tibble: 11,178 x 17
-    ##    volcano_number volcano_name eruption_number eruption_catego… area_of_activity
-    ##             <dbl> <chr>                  <dbl> <chr>            <chr>           
-    ##  1         266030 Soputan                22354 Confirmed Erupt… <NA>            
-    ##  2         343100 San Miguel             22355 Confirmed Erupt… <NA>            
-    ##  3         233020 Fournaise, …           22343 Confirmed Erupt… <NA>            
-    ##  4         345020 Rincon de l…           22346 Confirmed Erupt… <NA>            
-    ##  5         353010 Fernandina             22347 Confirmed Erupt… <NA>            
-    ##  6         273070 Taal                   22344 Confirmed Erupt… <NA>            
-    ##  7         282050 Kuchinoerab…           22345 Confirmed Erupt… <NA>            
-    ##  8         241040 Whakaari/Wh…           22338 Confirmed Erupt… 1978/90 Crater …
-    ##  9         311060 Semisopochn…           22341 Confirmed Erupt… <NA>            
-    ## 10         284096 Nishinoshima           22340 Confirmed Erupt… <NA>            
-    ## # … with 11,168 more rows, and 12 more variables: vei <dbl>, start_year <dbl>,
-    ## #   start_month <dbl>, start_day <dbl>, evidence_method_dating <chr>,
-    ## #   end_year <dbl>, end_month <dbl>, end_day <dbl>, latitude <dbl>,
-    ## #   longitude <dbl>, start_date <glue>, end_date <glue>
-
-``` r
-#View(eruptions)
-```
 
 Very preliminary exploratory data analysis, including some summary
 statistics and visualizations, along with some explanation on how they

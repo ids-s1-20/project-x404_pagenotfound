@@ -14,9 +14,9 @@ library(glue)
 ```
 
 ```{r read-in-data, message=FALSE}
-volcano <- read_csv("data/volcano.csv")
-eruptions <- read_csv("data/eruptions.csv")
-events <- read_csv("data/events.csv")
+volcano <- read_csv("../data/volcano.csv")
+eruptions <- read_csv("../data/eruptions.csv")
+events <- read_csv("../data/events.csv")
 
 ```
 
