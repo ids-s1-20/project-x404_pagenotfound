@@ -2,6 +2,8 @@ Project proposal
 ================
 x404-pagenotfound
 
+## Load Packages and Data
+
 ``` r
 library(tidyverse)
 library(broom)
@@ -15,17 +17,18 @@ eruptions <- read_csv("../data/eruptions.csv")
 events <- read_csv("../data/events.csv")
 ```
 
+## Introduction
+
 ![volcanopic](images/volcano.jpg)
 
-## 1\. Introduction
-
-## What factors affect the length of eruptions?
+**Research Question: What factors could affect the frequency of volcano
+eruptions?**
 
 As a team we choose to use the Volcano Eruptions data set from the
-tidytuesday package for our package, due to the interesting nature of
-the data, the number of observations, and the variety and number of
+tidytuesday package for our data due to the interesting nature of the
+data, the number of observations, and the variety and number of
 variables. We have decided our research will focus on the factors that
-could influence the length of volcano eruptions.
+could influence the frequency of volcano eruptions.
 
 The data in the Volcano eruption dataset comes from the Smithsonian
 Institution’s Global Volcanism Program (GVP), which reports on the
@@ -41,7 +44,9 @@ dataset each observation documents an eruption of one of the earth’s
 volcano, documenting where and when each eruption occurs, as well as the
 eruption type and category. At present we are unsure exactly how the
 data was collected as the sources don’t specify but we will continue to
-research how it might have been collected as we progress. \#\# 2. Data
+research how it might have been collected as we progress.
+
+## Data Sets
 
 ``` r
 glimpse(volcano)
@@ -115,7 +120,9 @@ glimpse(events)
     ## $ event_date_month    <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
     ## $ event_date_day      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 
-## 3\. Data analysis plan
+## Data Analysis Plan
+
+**Initial Data Visualistation:**
 
 ``` r
 eruptions2 <- eruptions %>%
@@ -151,25 +158,21 @@ volcanic_eruption %>%
 Our interest is in the spatial-temporal evolution of eruptions, and our
 initial exploration shows a steep increase in certain tectonic
 activities and not for some others. In the future we will try and add a
-geographical component \#\#library(lubridate) \#\#with(df1,
-ymd\_h(paste(year, month, day, hour, sep= ’ ’)))
+geographical component
 
-Section 3 - Data analysis plan: Our response variable is the length of
-the eruption, and we’ll have various explanatory variables which will be
-the various factors we want to find out if there’s a correlation between
-them and the length of the volcano’s erruption. We plan to investigate
-the following factors: -country -volcano type -techtonic settings -rock
-type -time since last erruption - we plan on investigating more aswell
+**Plan:**
+
+Our response variable is the length of the eruption, and we’ll have
+various explanatory variables which will be the various factors we want
+to find out if there’s a correlation between them and the length of the
+volcano’s erruption. We plan to investigate the following factors:
+-country -volcano type -techtonic settings -rock type -time since last
+erruption - we plan on investigating more aswell
 
 The data is observational so we don’t need a comparison group because
 this is the case we are only finding correlations in the data not
 causations, and any correlation established would need to be followed up
 by an experimental study.
-
-Very preliminary exploratory data analysis, including some summary
-statistics and visualizations, along with some explanation on how they
-help you learn more about your data. (You can add to these later as you
-work on your project.)
 
 At this moment in time we’re planning on using mean values, aswell as
 standard deviation and sample size determination. This will help us
