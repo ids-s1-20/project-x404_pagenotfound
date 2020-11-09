@@ -7,6 +7,8 @@ library(tidyverse)
 library(broom)
 library(janitor)
 library(glue)
+library(choroplethr)
+library(choroplethrMaps)
 ```
 
 ``` r
@@ -19,7 +21,7 @@ events <- read_csv("../data/events.csv")
 
 ## 1\. Introduction
 
-## What factors affect the length of eruptions?
+## What factors affect the volcanic eruptions?
 
 As a team we choose to use the Volcano Eruptions data set from the
 tidytuesday package for our package, due to the interesting nature of
@@ -115,63 +117,86 @@ glimpse(events)
     ## $ event_date_month    <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
     ## $ event_date_day      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 
+In order to create the visualization, we need to reformat the data:
+
+``` r
+#Join eruptions and volcano to match each eruption to its corresponding volcano
+volcanic_eruption <- left_join(volcano, eruptions, by="volcano_number")
+#load df with list of countries
+data("country.regions")
+#create CountVolc which stores number of eruptions for each country
+CountVolc = group_by(volcanic_eruption, country) %>% summarise(value = n())
+```
+
+    ## `summarise()` ungrouping output (override with `.groups` argument)
+
+``` r
+CountVolc = as.data.frame(CountVolc)
+CountVolc[,1] = tolower(CountVolc[,1])
+rownames(CountVolc) = CountVolc$country
+
+#some eruptions are on the border between two countries, so we split that count between each country
+CountVolc["chile","value"] = CountVolc["chile","value"] + CountVolc["chile-argentina","value"]/2
+CountVolc["argentina","value"] = CountVolc["argentina","value"] + CountVolc["chile-argentina","value"]/2
+
+#some country names must be changed to get the count
+CountVolc$country=gsub("united states", "united states of america", CountVolc$country)
+
+#Aggregating the counts into unique country names
+CountVolcUni <- group_by(CountVolc, country) %>%
+  summarise(value = sum(value))
+```
+
+    ## `summarise()` ungrouping output (override with `.groups` argument)
+
+``` r
+CountVolcUni = as.data.frame(CountVolcUni)
+rownames(CountVolcUni) = CountVolcUni$country
+```
+
 ## 3\. Data analysis plan
 
 ``` r
-eruptions2 <- eruptions %>%
-  mutate(
-    start_date = as.Date(glue("{start_year}-{start_month}-{start_day}")),
-    end_date = as.Date(glue("{end_year}-{end_month}-{end_day}")),
-    length_eruptions = end_date - start_date
-    )
+#create tibble with rownames as countries
+CountVolcFake = country.regions
+CountVolcFake$value = 0
+rownames(CountVolcFake) = CountVolcFake$region
+#choose the countries in both tibbles
+ii=intersect(CountVolcUni$country,country.regions$region)
+CountVolcFake[ii, "value"] = (CountVolcUni[ii, "value"])
+#create choropleth map with palette
+country_choropleth(CountVolcFake, num_colors = 9) +
+scale_fill_brewer(palette="YlOrRd") +
+labs(title = "Number of Volcanic Eruptions by Country")
 ```
 
-Since the data for end\_date turned out to be mostly NAs, out initial
-plot will plot number of eruptions vs year and will be grouped by
-tectonic\_setting. We will explore the factors that affect length of
-eruption once we have sorted out the NA problem.
+    ## Scale for 'fill' is already present. Adding another scale for 'fill', which
+    ## will replace the existing scale.
+
+![](proposal_files/figure-gfm/World-Map-1.png)<!-- -->
 
 ``` r
-#eruptions2$length_eruptions[is.na(eruptions2$end_year)]=1
-volcanic_eruption <- left_join(volcano, eruptions2, by="volcano_number")
-
-volcanic_eruption %>%
-  filter(start_year>1500) %>%
-  group_by(tectonic_settings, start_year) %>%
-  summarise(count = n()) %>%
-  ggplot(aes(x=start_year, y=count, color=tectonic_settings)) +
-    geom_line(alpha=0.5) +
-    labs(y="number of events per year")
+#find countries that arent included
+MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
 ```
 
-    ## `summarise()` regrouping output by 'tectonic_settings' (override with `.groups` argument)
-
-![](proposal_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
-
-Our interest is in the spatial-temporal evolution of eruptions, and our
-initial exploration shows a steep increase in certain tectonic
-activities and not for some others. In the future we will try and add a
-geographical component \#\#library(lubridate) \#\#with(df1,
-ymd\_h(paste(year, month, day, hour, sep= ’ ’)))
-
-Section 3 - Data analysis plan: Our response variable is the length of
-the eruption, and we’ll have various explanatory variables which will be
-the various factors we want to find out if there’s a correlation between
-them and the length of the volcano’s erruption. We plan to investigate
-the following factors: -country -volcano type -techtonic settings -rock
-type -time since last erruption - we plan on investigating more aswell
-
-The data is observational so we don’t need a comparison group because
-this is the case we are only finding correlations in the data not
-causations, and any correlation established would need to be followed up
-by an experimental study.
-
-Very preliminary exploratory data analysis, including some summary
-statistics and visualizations, along with some explanation on how they
-help you learn more about your data. (You can add to these later as you
-work on your project.)
-
-At this moment in time we’re planning on using mean values, aswell as
-standard deviation and sample size determination. This will help us
-understands the general trends in our data but also how consistent these
-are. We’ll likley add to this as we develop our knowledge further.
+We have chosen a very general research question to begin with, so we can
+decide the specifics of the project later. We want to explore what
+affects volcanic eruptions, including location (country), tectonic
+setting… etc. An example of what we might explore is eruption count by
+country, which can be seen in the map above. This visualization is more
+complicated than the ones we covered in class, but we think it is much
+easier to see which countries have had the most eruptions. Of course,
+this is just a start, and we will approach our question in other ways
+later. We will have multiple explanatory variables in our analysis on
+the factors that affect the frequency of eruptions (the response
+variable), so we can spot trends by location for example. As we can see,
+Japan, the United States, and Russia have had the most eruptions. We
+plan on further exploring the effect of location on eruptions, by
+plotting each eruption as a point on a map, and projecting those points
+onto a tectonic plate map. We could also explore the distribution of
+eruption counts, finding the mean and Sd for each hemisphere and
+comparing the two…etc (there are many trends we can find in this data
+set). This preliminary map will of course be altered and improved in the
+future, for example we might make the scale sqrt, or focus on certain
+regions more than others.
