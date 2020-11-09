@@ -6,6 +6,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Load Packages and Data
+
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
@@ -22,18 +24,20 @@ events <- read_csv("../data/events.csv")
 
 ```
 
+## Introduction
+
 ![volcanopic](images/volcano.jpg)
 
 
-## 1. Introduction
-## What factors affect volcanic eruptions?
+**Research Question: What factors could affect the frequency of volcano eruptions?**
 
-As a team we choose to use the Volcano Eruptions data set from the tidytuesday package for our package, due to the interesting nature of the data, the number of observations, and the variety and number of variables. We have decided our research will focus on the factors that could influence the length of volcano eruptions.
+As a team we choose to use the Volcano Eruptions data set from the tidytuesday package for our data due to the interesting nature of the data, the number of observations, and the variety and number of variables. We have decided our research will focus on the factors that could influence the frequency of volcano eruptions.
 
 The data in the Volcano eruption dataset comes from the Smithsonian Institution's Global Volcanism Program (GVP), which reports on the world's volcanos, and their eruptions, both current and dating back to 10,000 years ago. The data was collected from the Volcanos of the World database which is maintained by the GVP. The GVP's aim is to "document, understand, and disseminate information about global volcanic activity," as their website https://volcano.si.edu/ states.
 Each observation in the dataset volcano contains information on one of the earth's volcanoes, information such as the type of the volcano, where it is located and the types of rocks that make up te volcano. In the eruptions dataset each observation documents an eruption of one of the earth's volcano, documenting where and when each eruption occurs, as well as the eruption type and category.
 At present we are unsure exactly how the data was collected as the sources don't specify but we will continue to research how it might have been collected as we progress.
-## 2. Data
+
+## Data Sets
 
 
 ```{r glimpse-data}
@@ -71,6 +75,7 @@ CountVolcUni = as.data.frame(CountVolcUni)
 rownames(CountVolcUni) = CountVolcUni$country
 ```
 
+
 ## 3. Data analysis plan
 
 ```{r World-Map}
@@ -88,10 +93,16 @@ labs(title = "Number of Volcanic Eruptions by Country")
 
 
 
+
 #find countries that arent included
 MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
 ```
 
 
-We have chosen a very general research question to begin with, so we can decide the specifics of the project later. We want to explore what affects volcanic eruptions, including location (country), tectonic setting... etc. An example of what we might explore is eruption count by country, which can be seen in the map above. This visualization is more complicated than the ones we covered in class, but we think it is much easier to see which countries have had the most eruptions. Of course, this is just a start, and we will approach our question in other ways later. We will have multiple explanatory variables in our analysis on the factors that affect the frequency of eruptions (the response variable), so we can spot trends by location for example. As we can see, Japan, the United States, and Russia have had the most eruptions. We plan on further exploring the effect of location on eruptions, for example, by plotting each eruption as a point on a map, and projecting those points onto a tectonic plate map. We could also explore the distribution of eruption counts, with histograms, finding the mean and Sd for each hemisphere and comparing the two...etc (there are many trends we can find in this data set). This preliminary map will of course be altered and improved in the future, for example we might use a sqrt scale, or focus on certain regions more than others.
+```{r mean-count}
+CountVolc %>%
+  summarise(mean_active_countries = mean(value), sd_active_countries = sd(value))
+```
 
+We have chosen a very general research question to begin with, so we can decide the specifics of the project later. We want to explore what affects volcanic eruptions, including location (country), tectonic setting... etc. An example of what we might explore is eruption count by country, which can be seen in the map above. This visualization is more complicated than the ones we covered in class, but we think it is much easier to see which countries have had the most eruptions. Of course, this is just a start, and we will approach our question in other ways later. We will have multiple explanatory variables in our analysis on the factors that affect the frequency of eruptions (the response variable), so we can spot trends by location for example. As we can see, Japan, the United States, and Russia have had the most eruptions. We plan on further exploring the effect of location on eruptions, for example, by plotting each eruption as a point on a map, and projecting those points onto a tectonic plate map. We could also explore the distribution of eruption counts, with histograms, finding the mean and sd for each hemisphere and comparing the two...etc (there are many trends we can find in this data set). Just by looking at the mean and sd of active countries, we can already see how right skewed the distribution will be. 
+The preliminary map will of course be altered and improved in the future, for example we might use a sqrt scale, or focus on certain regions more than others.
