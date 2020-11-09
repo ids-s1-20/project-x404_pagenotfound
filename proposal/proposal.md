@@ -2,6 +2,8 @@ Project proposal
 ================
 x404-pagenotfound
 
+## Load Packages and Data
+
 ``` r
 library(tidyverse)
 library(broom)
@@ -17,17 +19,18 @@ eruptions <- read_csv("../data/eruptions.csv")
 events <- read_csv("../data/events.csv")
 ```
 
+## Introduction
+
 ![volcanopic](images/volcano.jpg)
 
-## 1\. Introduction
-
-## What factors affect the volcanic eruptions?
+**Research Question: What factors could affect the frequency of volcano
+eruptions?**
 
 As a team we choose to use the Volcano Eruptions data set from the
-tidytuesday package for our package, due to the interesting nature of
-the data, the number of observations, and the variety and number of
+tidytuesday package for our data due to the interesting nature of the
+data, the number of observations, and the variety and number of
 variables. We have decided our research will focus on the factors that
-could influence the length of volcano eruptions.
+could influence the frequency of volcano eruptions.
 
 The data in the Volcano eruption dataset comes from the Smithsonian
 Institution’s Global Volcanism Program (GVP), which reports on the
@@ -43,7 +46,9 @@ dataset each observation documents an eruption of one of the earth’s
 volcano, documenting where and when each eruption occurs, as well as the
 eruption type and category. At present we are unsure exactly how the
 data was collected as the sources don’t specify but we will continue to
-research how it might have been collected as we progress. \#\# 2. Data
+research how it might have been collected as we progress.
+
+## Data Sets
 
 ``` r
 glimpse(volcano)
@@ -180,6 +185,14 @@ labs(title = "Number of Volcanic Eruptions by Country")
 MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
 ```
 
+``` r
+CountVolc %>%
+  summarise(mean_active_countries = mean(value), sd_active_countries = sd(value))
+```
+
+    ##   mean_active_countries sd_active_countries
+    ## 1              111.2472            272.6953
+
 We have chosen a very general research question to begin with, so we can
 decide the specifics of the project later. We want to explore what
 affects volcanic eruptions, including location (country), tectonic
@@ -192,11 +205,13 @@ later. We will have multiple explanatory variables in our analysis on
 the factors that affect the frequency of eruptions (the response
 variable), so we can spot trends by location for example. As we can see,
 Japan, the United States, and Russia have had the most eruptions. We
-plan on further exploring the effect of location on eruptions, by
-plotting each eruption as a point on a map, and projecting those points
-onto a tectonic plate map. We could also explore the distribution of
-eruption counts, finding the mean and Sd for each hemisphere and
-comparing the two…etc (there are many trends we can find in this data
-set). This preliminary map will of course be altered and improved in the
-future, for example we might make the scale sqrt, or focus on certain
+plan on further exploring the effect of location on eruptions, for
+example, by plotting each eruption as a point on a map, and projecting
+those points onto a tectonic plate map. We could also explore the
+distribution of eruption counts, with histograms, finding the mean and
+sd for each hemisphere and comparing the two…etc (there are many trends
+we can find in this data set). Just by looking at the mean and sd of
+active countries, we can already see how right skewed the distribution
+will be. The preliminary map will of course be altered and improved in
+the future, for example we might use a sqrt scale, or focus on certain
 regions more than others.
