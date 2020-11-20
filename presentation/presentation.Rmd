@@ -1,7 +1,7 @@
 ---
-title: "Presentation title"
+title: "Factors affecting frequency of Volcanic eruptions"
 subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
+author: "x404-pagenotfound <br> Emma, Bridget, Sachin"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
