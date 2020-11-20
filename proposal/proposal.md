@@ -169,10 +169,10 @@ volcano’s erruption. We plan to investigate the following factors:
 -country -volcano type -techtonic settings -rock type -time since last
 erruption - we plan on investigating more aswell
 
-The data is observational so we don’t need a comparison group because
+*\#The data is observational so we don’t need a comparison group because
 this is the case we are only finding correlations in the data not
 causations, and any correlation established would need to be followed up
-by an experimental study.
+by an experimental study.\#*
 
 At this moment in time we’re planning on using mean values, aswell as
 standard deviation and sample size determination. This will help us
