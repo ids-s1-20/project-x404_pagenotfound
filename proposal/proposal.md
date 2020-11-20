@@ -185,10 +185,17 @@ labs(title = "Number of Volcanic Eruptions by Country")
 MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
 ```
 
+<<<<<<< HEAD
+*\#The data is observational so we don’t need a comparison group because
+this is the case we are only finding correlations in the data not
+causations, and any correlation established would need to be followed up
+by an experimental study.\#*
+=======
 ``` r
 CountVolc %>%
   summarise(mean_active_countries = mean(value), sd_active_countries = sd(value))
 ```
+>>>>>>> f7c7d0920d28511d589d03a08b05eda49d678b93
 
     ##   mean_active_countries sd_active_countries
     ## 1              111.2472            272.6953
