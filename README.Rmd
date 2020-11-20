@@ -1,6 +1,6 @@
 ---
-title: Project title
-author: by Team name
+title: Factors affecting frequency of Volcanic eruptions
+author: "x404-pagenotfound"
 output: github_document
 ---
 
