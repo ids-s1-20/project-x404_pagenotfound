@@ -4,11 +4,11 @@
 ## volcano.csv
 Volcano data frame has the dimensions - dimensions 958 x 26
 In the volcano data frame, each row represents one of the earths volcanos, containing information on a volcanos name, geographical location, the type of volcano it is and the rock type it consistent of.
-- `volcano_number`: Volcano unique ID
 
+- `volcano_number`: Volcano unique ID
 - `volcano_name`: Volcano name
 - `primary_volcano_type`: Volcano type (see wikipedia above for full details)
--`last_eruption_year` : Last year erupted
+- `last_eruption_year` : Last year erupted
 - `country`: Country
 - `region`: Region
 - `subregion`: Sub region
