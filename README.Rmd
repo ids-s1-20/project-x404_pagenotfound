@@ -21,6 +21,9 @@ Your results with proper output and graphics go in your presentation, this space
 
 ```{r load-data, echo = FALSE}
 # load data here, if you like
+volcano <- read_csv("/cloud/project/data/volcano.csv")
+eruptions <- read_csv("/cloud/project/data/eruptions.csv")
+events <- read_csv("/cloud/project/data/events.csv")
 ```
 
 ## Presentation
