@@ -1,7 +1,7 @@
 ---
 title: "Project proposal"
 author: "x404-pagenotfound"
-output: github_document
+output: html_document
 editor_options: 
   chunk_output_type: console
 ---
@@ -15,9 +15,12 @@ library(janitor)
 library(glue)
 library(choroplethr)
 library(choroplethrMaps)
+library(here)
+library(leaflet)
 ```
 
 ```{r read-in-data, message=FALSE}
+setwd("/cloud/project/proposal")
 volcano <- read_csv("../data/volcano.csv")
 eruptions <- read_csv("../data/eruptions.csv")
 events <- read_csv("../data/events.csv")
@@ -106,3 +109,22 @@ CountVolc %>%
 
 We have chosen a very general research question to begin with, so we can decide the specifics of the project later. We want to explore what affects volcanic eruptions, including location (country), tectonic setting... etc. An example of what we might explore is eruption count by country, which can be seen in the map above. This visualization is more complicated than the ones we covered in class, but we think it is much easier to see which countries have had the most eruptions. Of course, this is just a start, and we will approach our question in other ways later. We will have multiple explanatory variables in our analysis on the factors that affect the frequency of eruptions (the response variable), so we can spot trends by location for example. As we can see, Japan, the United States, and Russia have had the most eruptions. We plan on further exploring the effect of location on eruptions, for example, by plotting each eruption as a point on a map, and projecting those points onto a tectonic plate map. We could also explore the distribution of eruption counts, with histograms, finding the mean and sd for each hemisphere and comparing the two...etc (there are many trends we can find in this data set). Just by looking at the mean and sd of active countries, we can already see how right skewed the distribution will be. 
 The preliminary map will of course be altered and improved in the future, for example we might use a sqrt scale, or focus on certain regions more than others.
+
+
+
+```{r, cache=TRUE}
+set.seed(1)
+ran_rows <- sample(nrow(volcanic_eruption), 1000)
+leaflet(data = volcanic_eruption) %>% 
+  addTiles() %>%
+  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions())
+```
+
+
+
+
+
+
+
+
+

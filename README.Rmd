@@ -30,7 +30,7 @@ events <- read_csv("/cloud/project/data/events.csv")
 
 Our presentation can be found [here](presentation/presentation.html).
 
-## Data 
+## Data
 
 Include a citation for your data here. 
 See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 

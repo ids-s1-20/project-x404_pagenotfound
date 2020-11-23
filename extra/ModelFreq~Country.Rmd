@@ -1,0 +1,41 @@
+---
+title: "Model Frequency~Country"
+author: "x404-pagenotfound"
+date: "23/11/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load Packages and Data
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(broom)
+library(janitor)
+library(glue)
+library(choroplethr)
+library(choroplethrMaps)
+library(here)
+```
+
+```{r read-in-data, message=FALSE}
+setwd("/cloud/project/proposal")
+volcano <- read_csv("../data/volcano.csv")
+eruptions <- read_csv("../data/eruptions.csv")
+events <- read_csv("../data/events.csv")
+
+```
+
+```{r model}
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  Fit()
+
+
+```
