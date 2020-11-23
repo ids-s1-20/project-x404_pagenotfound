@@ -1,0 +1,79 @@
+---
+title: "Model frequency~techtonics"
+author: "Bridget"
+date: "11/23/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Load Packages
+```{r load-packages}
+library(tidyverse)
+library(tidymodels)
+library(janitor)
+library(glue)
+```
+
+##Read in Data
+
+```{r read-in-data, message=FALSE}
+setwd("/cloud/project/proposal")
+volcano <- read_csv("../data/volcano.csv")
+eruptions <- read_csv("../data/eruptions.csv")
+events <- read_csv("../data/events.csv")
+
+```
+
+##Tidy Data Needed
+```{r seperate-techtonics}
+volcano_tecs <- volcano%>%
+  #filter out Vitim Volcanic Field volcano as tec settings are unknown
+  filter(tectonic_settings != "Unknown")%>%
+  #seperate the tec setting from the crust 
+  separate(tectonic_settings, c("techtonic_setting", "crust"),
+                    sep = "([/])")
+  
+```
+
+```{r eruption-frequency}
+eruption_tecs<- left_join(volcano_tecs, eruptions,
+                          by="volcano_number", "volcano_name")
+#eruption_tecs%>%
+ # group_by(volcano_number)%>%
+  #summarise()
+  
+```
+
+##Split Data
+```{r split-data}
+#set.seed(321)
+#volcano_split <- initial_split(volcano, prop = 0.80)
+#train_data <- training(volcano_split)
+#test_data  <- testing(volcano_split)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

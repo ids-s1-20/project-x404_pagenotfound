@@ -127,4 +127,3 @@ leaflet(data = volcanic_eruption) %>%
 
 
 
-
