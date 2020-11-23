@@ -15,7 +15,6 @@ library(janitor)
 library(glue)
 library(choroplethr)
 library(choroplethrMaps)
-library(here)
 library(leaflet)
 ```
 
@@ -122,6 +121,16 @@ leaflet(data = volcanic_eruption) %>%
 
 
 
+```{r}
+leaflet(volcanic_eruption) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude.x, ~latitude.x,
+    radius = 3,
+    color = "red",
+    stroke = FALSE, fillOpacity = 0.4
+  )
+```
 
 
 
