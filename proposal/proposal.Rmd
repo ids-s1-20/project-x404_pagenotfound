@@ -15,7 +15,6 @@ library(janitor)
 library(glue)
 library(choroplethr)
 library(choroplethrMaps)
-library(here)
 library(leaflet)
 ```
 
@@ -112,7 +111,7 @@ The preliminary map will of course be altered and improved in the future, for ex
 
 
 
-```{r, cache=TRUE}
+```{r}
 set.seed(1)
 ran_rows <- sample(nrow(volcanic_eruption), 1000)
 leaflet(data = volcanic_eruption) %>% 
@@ -122,7 +121,19 @@ leaflet(data = volcanic_eruption) %>%
 
 
 
+```{r}
+leaflet(volcanic_eruption) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude.x, ~latitude.x,
+    radius = 3,
+    color = "red",
+    stroke = FALSE, fillOpacity = 0.4
+  )
+```
 
+
+#![tectonicmap](images/tectonicplatesmap.png)
 
 
 
