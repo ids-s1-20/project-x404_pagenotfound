@@ -15,12 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
+library(tidymodels)
+library(broom)
 library(broom)
 library(janitor)
 library(glue)
 library(choroplethr)
 library(choroplethrMaps)
 library(here)
+library(countrycode)
 ```
 
 ```{r read-in-data, message=FALSE}
@@ -31,11 +34,64 @@ events <- read_csv("../data/events.csv")
 
 ```
 
+
+```{r country-continent}
+
+
+
+CountVolc$continent <- countrycode(sourcevar = CountVolc[, "country"],
+                            origin = "country.name",
+                            destination = "continent")
+
+CountVolc <- CountVolc %>%
+  mutate(continent = case_when(
+    country== "antartica" ~ "antartica"
+    country=="armenia-azerbaijan" ~ "Eurasia"
+    country=="chile-argentina" ~ "Americas"
+    country=="chile-bolivia" ~ "Americas"
+    country=="chile-peru" ~ "Americas"
+    country=="chile-argentina" ~ "Americas"
+    country="china-north korea" ~ "Asia"
+    country=="colombia-ecuador" ~ "Americas"
+    country=="dr congo-rwanda" ~ "Africa"
+    country=="	
+el salvador-guatemala" ~ "Americas"
+    country=="eritrea-djibouti" ~ "Africa"
+    country=="	
+ethiopia-djibouti" ~ "Africa"
+    country=="	
+ethiopia-kenya" ~ "Africa"
+    country=="	
+guatemala-el salvador" ~ "Americas"
+    country=="	
+japan - administered by russia" ~ "Asia"
+    country=="mexico-guatemala-guatemala" ~ "Americas"
+    country == "	
+syria-jordan-saudi arabia" ~ "Asia"
+    country=="uganda-rwanda" ~ "Africa"
+    TRUE ~ continent )  )
+
+```
+
+
 ```{r model}
 
 linear_reg() %>%
   set_engine("lm") %>%
-  Fit()
+  fit(log(value)~country, data=CountVolc) %>%
+  tidy()
+
+
+```
+
+
+
+```{r model-frequency-primaryvolcanotype}
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit()
+
 
 
 ```
