@@ -37,8 +37,6 @@ events <- read_csv("../data/events.csv")
 
 ```{r country-continent}
 
-
-
 CountVolc$continent <- countrycode(sourcevar = CountVolc[, "country"],
                             origin = "country.name",
                             destination = "continent")
@@ -92,11 +90,14 @@ linear_reg() %>%
 
 fq_continent_fit <-linear_reg() %>%
   set_engine("lm") %>%
-  fit(value~continent, data=CountVolc) %>%
-  tidy()
-
+  fit(value~continent, data=CountVolc) 
 
 ```
+
+```{r tidy-freq-continent-fit}
+tidy(fq_continent_fit)
+```
+
 
 Relationship between Frequency of Volcanic Eruptions and Continent
 The categorical explanatory variable, continent, has 7 levels, each representing a different continent. Each of the levels are encoded to dummy variables, and each slope estimate is compared to the baseline. In this case the baseline continent is Africa, as it is first in alphabetical order. 
@@ -112,9 +113,11 @@ The frequency of volcanic eruptions in Oceania is estimated to be 82.4 greater t
 ```{r residual-plot}
 fq_continent_fit_aug <- augment(fq_continent_fit$fit)
 
-ggplot(fq_continent_fit_aug, mappping = aes(x=.fited, y=.resid)) +
-  geom_point(alpha=0.5) +
-  geom_hline(yintercept=0, color="gray", lty="dashed") +
-  labs(x="Predicted Frequency", y="Residuals")
+
+ggplot( fq_continent_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
+	geom_jitter(alpha=0.5) +
+	geom_hline(yintercept=0, color="gray", lty="dashed" ) +
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
+
 
 ```
