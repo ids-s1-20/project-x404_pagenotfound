@@ -36,7 +36,6 @@ events <- read_csv("../data/events.csv")
 
 
 ```{r country-continent}
-
 CountVolc$continent <- countrycode(sourcevar = CountVolc[, "country"],
                             origin = "country.name",
                             destination = "continent")
@@ -104,7 +103,7 @@ The categorical explanatory variable, continent, has 7 levels, each representing
 Intercept
 The frequency of volcanic eruptions in Africa is expected, on average to be 15.5 .
 The frequency of volcanic eruptions in the Americas is estimated to be 113 greater than the frequency of volcanic eruptions in Africa.
-The frequency of volcanic eruptions in Antartica is estimated to be 58.5 greater than the frequency of volcanic eruptions in Africa.
+The frequency of volcanic eruptions in Antarctica is estimated to be 58.5 greater than the frequency of volcanic eruptions in Africa.
 The frequency of volcanic eruptions in Asia is estimated to be 187 greater than the frequency of volcanic eruptions in Africa.
 The frequency of volcanic eruptions in Eurasia is estimated to be 12.5 less than the frequency of volcanic eruptions in Africa.
 The frequency of volcanic eruptions in Europe is estimated to be 195 greater than the frequency of volcanic eruptions in Africa.
@@ -121,3 +120,16 @@ ggplot( fq_continent_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
 
 
 ```
+
+The residual plot shows a visible pattern around the x axis. The residual plots form groups of patterns, with each group generally rising vertically from a point on the x axis. This suggests that a linear model might not be the best model to fit to this data set. -
+
+```{r r-squared}
+
+##percentage variability in the response variable explained by the regression model
+
+r_squared_fp_continent <- glance(fq_continent_fit)$r.squared
+r_adj_squared_fp_continent <-glance(fq_continent_fit)$adj.r.squared
+
+```
+
+The R^2 sqaured value of fp_continent_fit is `r round(r_squared_fp_continent,3)` and the adjusted R^2 value is `r round(r_adj_squared_fp_continent,3). This signifies that there is a 6.63% variability in the response variable explained by the regression model. The adjusted r squared is a more objective measure for model selection. 
