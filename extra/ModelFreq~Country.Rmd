@@ -44,31 +44,33 @@ CountVolc$continent <- countrycode(sourcevar = CountVolc[, "country"],
                             destination = "continent")
 
 CountVolc <- CountVolc %>%
-  mutate(continent = case_when(
-    country== "antartica" ~ "antartica"
-    country=="armenia-azerbaijan" ~ "Eurasia"
-    country=="chile-argentina" ~ "Americas"
-    country=="chile-bolivia" ~ "Americas"
-    country=="chile-peru" ~ "Americas"
-    country=="chile-argentina" ~ "Americas"
-    country="china-north korea" ~ "Asia"
-    country=="colombia-ecuador" ~ "Americas"
-    country=="dr congo-rwanda" ~ "Africa"
+  mutate(
+    country = as.character(country),
+    continent = case_when(
+    country== "antarctica" ~ "Antartica",
+    country=="armenia-azerbaijan" ~ "Eurasia",
+    country=="chile-argentina" ~ "Americas",
+    country=="chile-bolivia" ~ "Americas",
+    country=="chile-peru" ~ "Americas",
+    country=="chile-argentina" ~ "Americas",
+    ##country="china-north korea" ~ "Asia",
+    country=="colombia-ecuador" ~ "Americas",
+    country=="dr congo-rwanda" ~ "Africa",
     country=="	
-el salvador-guatemala" ~ "Americas"
-    country=="eritrea-djibouti" ~ "Africa"
+el salvador-guatemala" ~ "Americas",
+    country=="eritrea-djibouti" ~ "Africa",
     country=="	
-ethiopia-djibouti" ~ "Africa"
+ethiopia-djibouti" ~ "Africa",
     country=="	
-ethiopia-kenya" ~ "Africa"
+ethiopia-kenya" ~ "Africa",
     country=="	
-guatemala-el salvador" ~ "Americas"
+guatemala-el salvador" ~ "Americas",
     country=="	
-japan - administered by russia" ~ "Asia"
-    country=="mexico-guatemala-guatemala" ~ "Americas"
+japan - administered by russia" ~ "Asia",
+    country=="mexico-guatemala-guatemala" ~ "Americas",
     country == "	
-syria-jordan-saudi arabia" ~ "Asia"
-    country=="uganda-rwanda" ~ "Africa"
+syria-jordan-saudi arabia" ~ "Asia",
+    country=="uganda-rwanda" ~ "Africa",
     TRUE ~ continent )  )
 
 ```
