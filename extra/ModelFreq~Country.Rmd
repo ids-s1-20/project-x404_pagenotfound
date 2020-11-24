@@ -90,12 +90,15 @@ linear_reg() %>%
 
 ```{r model-frequency-primaryvolcanotype}
 
-linear_reg() %>%
+fq_continent_fit <-linear_reg() %>%
   set_engine("lm") %>%
   fit(value~continent, data=CountVolc) %>%
   tidy()
 
+
 ```
+
+Relationship between Frequency of Volcanic Eruptions and Continent
 The categorical explanatory variable, continent, has 7 levels, each representing a different continent. Each of the levels are encoded to dummy variables, and each slope estimate is compared to the baseline. In this case the baseline continent is Africa, as it is first in alphabetical order. 
 Intercept
 The frequency of volcanic eruptions in Africa is expected, on average to be 15.5 .
@@ -105,3 +108,13 @@ The frequency of volcanic eruptions in Asia is estimated to be 187 greater than 
 The frequency of volcanic eruptions in Eurasia is estimated to be 12.5 less than the frequency of volcanic eruptions in Africa.
 The frequency of volcanic eruptions in Europe is estimated to be 195 greater than the frequency of volcanic eruptions in Africa.
 The frequency of volcanic eruptions in Oceania is estimated to be 82.4 greater than the frequency of volcanic eruptions in Africa.
+
+```{r residual-plot}
+fq_continent_fit_aug <- augment(fq_continent_fit$fit)
+
+ggplot(fq_continent_fit_aug, mappping = aes(x=.fited, y=.resid)) +
+  geom_point(alpha=0.5) +
+  geom_hline(yintercept=0, color="gray", lty="dashed") +
+  labs(x="Predicted Frequency", y="Residuals")
+
+```
