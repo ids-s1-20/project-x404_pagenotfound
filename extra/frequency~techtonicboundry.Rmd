@@ -41,10 +41,24 @@ volcano_tecs <- volcano%>%
 ```{r eruption-frequency}
 eruption_tecs<- left_join(volcano_tecs, eruptions,
                           by="volcano_number", "volcano_name")
-#eruption_tecs%>%
- # group_by(volcano_number)%>%
-  #summarise()
   
+```
+
+##Visualisation
+```{r viz}
+eruption_tecs%>%
+  group_by(crust)%>%
+  ggplot(aes(y = crust))+
+  geom_bar()
+```  
+
+```{r viz2}
+eruption_tecs%>%
+  group_by(techtonic_setting)%>%
+  ggplot(aes(y = techtonic_setting))+
+  geom_bar()
+
+
 ```
 
 ##Split Data
