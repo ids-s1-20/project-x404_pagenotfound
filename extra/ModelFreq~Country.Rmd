@@ -92,8 +92,8 @@ linear_reg() %>%
 
 linear_reg() %>%
   set_engine("lm") %>%
-  fit()
-
-
+  fit(value~continent, data=CountVolc) %>%
+  tidy()
 
 ```
+
