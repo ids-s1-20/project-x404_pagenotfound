@@ -138,7 +138,7 @@ crust_fit_aug <- augment(crust_fit$fit)
 ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid, colour = crust)) +
 	geom_jitter(alpha=0.8) +
 	geom_hline(yintercept=0, color="gray", lty="dashed" )+ 
-	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")+
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals", colour = "Crust type (thickness)")+
   scale_colour_manual(values = c(
     " Continental crust (>25 km)" = "#d73027",
     " Oceanic crust (< 15 km)" = "#4575b4",
