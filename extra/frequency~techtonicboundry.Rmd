@@ -15,6 +15,9 @@ library(tidyverse)
 library(tidymodels)
 library(janitor)
 library(glue)
+library(choroplethr)
+library(choroplethrMaps)
+library(leaflet)
 ```
 
 ##Read in Data
@@ -40,40 +43,39 @@ volcano_tecs <- volcano%>%
 
 ```{r eruption-frequency}
 eruption_tecs<- left_join(volcano_tecs, eruptions,
-                          by="volcano_number", "volcano_name")
+                          by=c("volcano_number", "volcano_name",
+                               "latitude", "longitude"))
+  
 eruption_tecs_fqncy <- eruption_tecs%>%
-  count(volcano_number, volcano_name.x, techtonic_setting, crust)
+  count(volcano_number, volcano_name, techtonic_setting, crust) %>% 
+  mutate(frequency = as.factor(n))%>%
+  filter(crust != "Crustal thickness unknown")
 
   
 ```
 
 ##Visualisation
 ```{r viz}
-eruption_tecs%>%
+eruption_tecs_fqncy%>%
   group_by(crust)%>%
   ggplot(aes(y = crust))+
   geom_bar()
 ```  
 
 ```{r viz2}
-eruption_tecs%>%
+eruption_tecs_fqncy%>%
   group_by(techtonic_setting)%>%
   ggplot(aes(y = techtonic_setting))+
   geom_bar()
 
 
 ```
+The first of the two visualizations above show that the majority of erruptions in the data set occur on continental crust which is over 25km thick.
+The second shows most erruptions in the dataset have occured from volcanos with the techtonic setting in the subduction zone
 
-##Split Data
-```{r split-data}
-set.seed(321)
-tec_split <- initial_split(eruption_tecs_fqncy, prop = 0.80)
-train_data_tec <- training(tec_split)
-test_data_tec  <- testing(tec_split)
-#not needed for lms but keeping in case of need later
-```
+I aim to see if there is a model to support the hypothesis that it is a there is more likely to be a volcanic erruption if the volcano is lying on continental crust and has techtonic settings in the subduction zone than other crust types and techtonic settings.
 
-##Model
+##Linear Model
 ```{r tec_setting-model}
 tec_fit <- linear_reg()%>%
   set_engine("lm")%>%
@@ -84,6 +86,17 @@ tec_fit <- linear_reg()%>%
 ```
 The adjusted R squared for the linear model shows it only accounts for 1.1% of the data and therefore a linear model isn't appropriate for the data, I will continue to explore general models to fit the data better.
 
+```{r tec_setting-residuals}
+tec_fit_aug <- augment(tec_fit$fit)
+
+ggplot(tec_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
+	geom_jitter(alpha=0.5) +
+	geom_hline(yintercept=0, color="gray", lty="dashed" )+
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
+```
+
+The residuals of predicted frequency seem to be in 3 distinct clusters, potentially that represent each of the 3 settings, however the plot further supports that a linear model is not appropriate for the data in question.
+
 ```{r crust-model}
 crust_fit <- linear_reg()%>%
   set_engine("lm")%>%
@@ -93,6 +106,94 @@ crust_fit <- linear_reg()%>%
 
 ```
 The adjusted R squared for the linear model shows it only accounts for 0.1% of the data and therefore a linear model isn't appropriate for the data, I will continue to explore general models to fit the data better.
+
+```{r crust-fit-residuals}
+crust_fit_aug <- augment(crust_fit$fit)
+
+ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
+	geom_jitter(alpha=0.5) +
+	geom_hline(yintercept=0, color="gray", lty="dashed" )+ 
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
+```
+The residuals of predicted frequency seem to be in 4 distinct clusters, potentially that represent each of the 4 different crust types, however the plot further supports that a linear model is not appropriate for the data in question.
+
+##Split Data
+```{r split-data}
+set.seed(321)
+tec_split <- initial_split(eruption_tecs_fqncy, prop = 0.80)
+train_data_tec <- training(tec_split)
+test_data_tec  <- testing(tec_split)
+```
+
+##General Model
+```{r general-model-tecs}
+#tec_fit_log <-logistic_reg()%>%
+  #set_engine("glm")%>%
+  #fit(frequency ~ techtonic_setting, data= test_data_tec)
+
+#crust_fit_log <- 
+logistic_reg()%>%
+  set_engine("glm")%>%
+  fit(frequency ~ crust, data= test_data_tec)
+  
+
+```
+
+Map visualizations
+```{r tec-map}
+tec_pal<- colorFactor(
+  palette = c("#a50026", "#313695", "#4d9221"),
+  domain = eruption_tecs$techtonic_setting
+)
+#red=intraplate
+#blue=riftzone
+#green=subductionzone
+
+
+leaflet(eruption_tecs) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude,
+    radius = 3,
+    color = ~tec_pal(techtonic_setting),
+    stroke = FALSE, 
+    fillOpacity = 0.4
+  )
+```
+
+```{r crust-map}
+crust_pal<- colorFactor(
+  palette = c("#d73027", "#762a83", "#fee090", "#4575b4"),
+  domain = eruption_tecs$crust
+)
+#red=continental
+#yellow=intermediate
+#blue=oceanic
+#purple=unknown
+
+
+leaflet(eruption_tecs) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude,
+    radius = 3,
+    color = ~crust_pal(crust),
+    stroke = FALSE, 
+    fillOpacity = 0.4
+  )
+```
+
+
+```{r filter}
+eruption_tecs%>%
+  filter(country == "Indonesia")%>%
+  View()
+
+```
+
+
+
+
 
 
 
