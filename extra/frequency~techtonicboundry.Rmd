@@ -61,16 +61,32 @@ eruption_tecs_fqncy <- eruption_tecs%>%
 ```{r viz}
 eruption_tecs_fqncy%>%
   group_by(crust)%>%
-  ggplot(aes(y = crust))+
-  geom_bar()
+  ggplot(aes(y = fct_rev(fct_infreq(crust)), fill = crust))+
+  geom_bar()+
+  labs(y = "Crust Type (thickness)",
+       x = "Eruptions", 
+       title = "Frequency of eruptions on different crusts")+
+  scale_fill_manual(values = c(
+    " Continental crust (>25 km)" = "#d73027",
+    " Oceanic crust (< 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))+
+  guides(fill = FALSE)
 ```  
 
 ```{r viz2}
 eruption_tecs_fqncy%>%
   group_by(techtonic_setting)%>%
-  ggplot(aes(y = techtonic_setting))+
-  geom_bar()
-
+  ggplot(aes(y = techtonic_setting, fill = techtonic_setting))+
+  geom_bar()+
+    labs(y = "Tectonic Setting",
+       x = "Eruptions", 
+       title = "Frequency of eruptions for different tectonic settings")+
+  scale_fill_manual(values = c(
+    "Intraplate " = "#a50026",
+    "Rift zone " = "#313695",
+    "Subduction zone " = "#4d9221"))+
+  guides(fill = FALSE)
+  
 
 ```
 The first of the two visualizations above show that the majority of erruptions in the data set occur on continental crust which is over 25km thick.
@@ -92,13 +108,19 @@ The adjusted R squared for the linear model shows it only accounts for 1.2% of t
 ```{r tec_setting-residuals}
 tec_fit_aug <- augment(tec_fit$fit)
 
-ggplot(tec_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
-	geom_jitter(alpha=0.5) +
+ggplot(tec_fit_aug, mapping=aes( x=.fitted, y =.resid, 
+                                 colour = techtonic_setting)) +
+	geom_jitter(alpha=0.8) +
 	geom_hline(yintercept=0, color="gray", lty="dashed" )+
-	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals",
+	     colour = "Tectonic Setting")+
+    scale_colour_manual(values = c(
+    "Intraplate " = "#a50026",
+    "Rift zone " = "#313695",
+    "Subduction zone " = "#4d9221"))
 ```
 
-The residuals of predicted frequency seem to be in 3 distinct clusters, potentially that represent each of the 3 settings, however the plot further supports that a linear model is not appropriate for the data in question.
+The residuals of predicted frequency seem to be in 3 distinct clusters. By adding an aesthetics arguement for colour of each tectonic setting it is clear that each of these clusters represents each setting. The plot further supports that a linear model is not appropriate for the data in question.
 
 ```{r crust-model}
 crust_fit <- linear_reg()%>%
@@ -113,12 +135,16 @@ The adjusted R squared for the linear model shows it only accounts for 0.2% of t
 ```{r crust-fit-residuals}
 crust_fit_aug <- augment(crust_fit$fit)
 
-ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
-	geom_jitter(alpha=0.5) +
+ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid, colour = crust)) +
+	geom_jitter(alpha=0.8) +
 	geom_hline(yintercept=0, color="gray", lty="dashed" )+ 
-	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")+
+  scale_colour_manual(values = c(
+    " Continental crust (>25 km)" = "#d73027",
+    " Oceanic crust (< 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))
 ```
-The residuals of predicted frequency seem to be in 3 distinct clusters, potentially that represent each of the 3 different crust types, however the plot further supports that a linear model is not appropriate for the data in question.
+The residuals of predicted frequency seem to be in 3 distinct clusters. By adding an aesthetics arguement for colour of each crust type and thickness it is clear that each of these clusters represents each crust type. The plot further supports that a linear model is not appropriate for the data in question.
 
 ## Split Data
 ```{r split-data}
@@ -130,18 +156,21 @@ test_data_tec  <- testing(tec_split)
 
 ## General Model
 ```{r general-model-tecs}
-#tec_fit_log <-logistic_reg()%>%
-  #set_engine("glm")%>%
-  #fit(frequency ~ techtonic_setting, data= test_data_tec)
-
-#crust_fit_log <- 
-logistic_reg()%>%
+#tec_fit_log <-
+  logistic_reg()%>%
   set_engine("glm")%>%
-  fit(frequency ~ crust, data= test_data_tec)
-  
+  fit(frequency ~ techtonic_setting, data= test_data_tec)%>%
+  tidy()
 
 ```
 
+```{r general-model-crust}
+#crust_fit_log <- 
+  logistic_reg()%>%
+  set_engine("glm")%>%
+  fit(frequency ~ crust, data= test_data_tec)%>%
+  tidy()
+```
 ## Map visualizations
 ```{r tec-map}
 tec_pal<- colorFactor(
