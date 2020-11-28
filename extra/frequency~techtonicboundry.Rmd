@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##Load Packages
+## Load Packages
 ```{r load-packages}
 library(tidyverse)
 library(tidymodels)
@@ -20,7 +20,7 @@ library(choroplethrMaps)
 library(leaflet)
 ```
 
-##Read in Data
+## Read in Data
 
 ```{r read-in-data, message=FALSE}
 setwd("/cloud/project/proposal")
@@ -30,7 +30,7 @@ events <- read_csv("../data/events.csv")
 
 ```
 
-##Tidy Data Needed
+## Tidy Data Needed
 ```{r seperate-techtonics}
 volcano_tecs <- volcano%>%
   #filter out Vitim Volcanic Field volcano as tec settings are unknown
@@ -49,12 +49,15 @@ eruption_tecs<- left_join(volcano_tecs, eruptions,
 eruption_tecs_fqncy <- eruption_tecs%>%
   count(volcano_number, volcano_name, techtonic_setting, crust) %>% 
   mutate(frequency = as.factor(n))%>%
-  filter(crust != "Crustal thickness unknown")
+  #str_trim("crust", side = "left")%>%
+  #ideally remove whitespace for easier use but leave for later
+  filter(crust != " Crustal thickness unknown")
+  
 
   
 ```
 
-##Visualisation
+## Initial Visualisations
 ```{r viz}
 eruption_tecs_fqncy%>%
   group_by(crust)%>%
@@ -75,7 +78,7 @@ The second shows most erruptions in the dataset have occured from volcanos with 
 
 I aim to see if there is a model to support the hypothesis that it is a there is more likely to be a volcanic erruption if the volcano is lying on continental crust and has techtonic settings in the subduction zone than other crust types and techtonic settings.
 
-##Linear Model
+## Linear Models
 ```{r tec_setting-model}
 tec_fit <- linear_reg()%>%
   set_engine("lm")%>%
@@ -84,7 +87,7 @@ tec_fit <- linear_reg()%>%
   glance(tec_fit)$adj.r.squared
 
 ```
-The adjusted R squared for the linear model shows it only accounts for 1.1% of the data and therefore a linear model isn't appropriate for the data, I will continue to explore general models to fit the data better.
+The adjusted R squared for the linear model shows it only accounts for 1.2% of the data and therefore a linear model isn't appropriate for the data, I will continue to explore general models to fit the data better.
 
 ```{r tec_setting-residuals}
 tec_fit_aug <- augment(tec_fit$fit)
@@ -105,7 +108,7 @@ crust_fit <- linear_reg()%>%
   glance(crust_fit)$adj.r.squared
 
 ```
-The adjusted R squared for the linear model shows it only accounts for 0.1% of the data and therefore a linear model isn't appropriate for the data, I will continue to explore general models to fit the data better.
+The adjusted R squared for the linear model shows it only accounts for 0.2% of the data and therefore a linear model isn't appropriate for the data, I will continue to explore general models to fit the data better.
 
 ```{r crust-fit-residuals}
 crust_fit_aug <- augment(crust_fit$fit)
@@ -115,9 +118,9 @@ ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
 	geom_hline(yintercept=0, color="gray", lty="dashed" )+ 
 	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
 ```
-The residuals of predicted frequency seem to be in 4 distinct clusters, potentially that represent each of the 4 different crust types, however the plot further supports that a linear model is not appropriate for the data in question.
+The residuals of predicted frequency seem to be in 3 distinct clusters, potentially that represent each of the 3 different crust types, however the plot further supports that a linear model is not appropriate for the data in question.
 
-##Split Data
+## Split Data
 ```{r split-data}
 set.seed(321)
 tec_split <- initial_split(eruption_tecs_fqncy, prop = 0.80)
@@ -125,7 +128,7 @@ train_data_tec <- training(tec_split)
 test_data_tec  <- testing(tec_split)
 ```
 
-##General Model
+## General Model
 ```{r general-model-tecs}
 #tec_fit_log <-logistic_reg()%>%
   #set_engine("glm")%>%
@@ -139,7 +142,7 @@ logistic_reg()%>%
 
 ```
 
-Map visualizations
+## Map visualizations
 ```{r tec-map}
 tec_pal<- colorFactor(
   palette = c("#a50026", "#313695", "#4d9221"),
@@ -184,12 +187,6 @@ leaflet(eruption_tecs) %>%
 ```
 
 
-```{r filter}
-eruption_tecs%>%
-  filter(country == "Indonesia")%>%
-  View()
-
-```
 
 
 
