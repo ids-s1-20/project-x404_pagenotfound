@@ -87,6 +87,27 @@ background-image: (presentation_files/volcano.jpg)
 
 ---
 
+```{r World-Map, echo=FALSE}
+#create tibble with rownames as countries
+CountVolcFake = country.regions
+CountVolcFake$value = 0
+rownames(CountVolcFake) = CountVolcFake$region
+#choose the countries in both tibbles
+ii=intersect(CountVolcUni$country,country.regions$region)
+CountVolcFake[ii, "value"] = (CountVolcUni[ii, "value"])
+#create choropleth map with palette
+country_choropleth(CountVolcFake, num_colors = 9) +
+scale_fill_brewer(palette="YlOrRd") +
+labs(title = "Number of Volcanic Eruptions by Country")
+
+
+
+
+#find countries that arent included
+MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
+```
+
+---
 class: inverse, middle, center
 
 # Using xaringan
