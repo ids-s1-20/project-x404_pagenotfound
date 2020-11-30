@@ -77,11 +77,11 @@ volcanic_eruption %>%
   mutate( freq_eruptions=n()) %>%
   arrange(desc(freq_eruptions)) %>%
   distinct(primary_volcano_type, freq_eruptions) %>%
-  head(10)%>%
+  head(15)%>%
   ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),y=freq_eruptions,fill=primary_volcano_type)) +
   geom_col() +
   coord_flip() +
-  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions byVocano Type") +
-  scale_fill_brewer(palette="YlOrRd")
+  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions byVocano Type") #+
+ # scale_fill_brewer(palette="YlOrRd")
 
 ```
