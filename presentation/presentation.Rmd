@@ -226,7 +226,7 @@ Limitations:
 ---
 # Bar chart frequency by country by volcano type
 
-```{r eruptions-by-country-and-volcano-type}
+```{r eruptions-by-country-and-volcano-type, echo=FALSE}
 
 volcanic_eruption %>%
   group_by(country, primary_volcano_type) %>%
@@ -244,7 +244,7 @@ volcanic_eruption %>%
 ```
 ---
 # Bar chart frequency by volcano type
- ```{r eruptions-by-volcano-type}
+ ```{r eruptions-by-volcano-type, echo=FALSE}
 
 volcanic_eruption %>%
   group_by(primary_volcano_type) %>%
