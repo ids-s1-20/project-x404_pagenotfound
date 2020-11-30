@@ -3,7 +3,7 @@ title: "Factors affecting frequency of Volcanic eruptions"
 subtitle: "Presentation subtitle (if any)"
 author: "x404-pagenotfound <br> Emma, Bridget, Sachin"
 institute: "University of Edinburgh"
-date: "`r Sys.Date()`"
+date: "4 December 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -45,7 +45,6 @@ events <- read_csv("../data/events.csv")
 ```
 
 
-
 class: center, middle
 
 ## A statement of the overall goal / research question
@@ -58,11 +57,8 @@ class: inverse, center, middle
 
 ---
 
-# Volcano Dataset
 
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
+background-image: (images/volcano.jpg)
 
 ---
 
@@ -207,3 +203,28 @@ Limitations:
 `xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
 
 - And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+---
+
+# Map eruptions
+
+---
+
+# Map eruptions interactive
+
+---
+
+# Model Frequency
+
+--- 
+# Map eruptions as data points compared with tectonic plates
+---
+# Map eruptions by tectonic plate type
+---
+# Model frequency by tectonic plate type
+---
+# Model frequency by crust type
+---
+# Bar chart frequency by country by volcano type
+---
+# Bar chart frequency by volcano type
+
