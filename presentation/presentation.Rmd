@@ -107,6 +107,30 @@ labs(title = "Number of Volcanic Eruptions by Country")
 MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
 ```
 
+
+---
+
+```{r, echo=FALSE}
+set.seed(1)
+ran_rows <- sample(nrow(volcanic_eruption), 1000)
+leaflet(data = volcanic_eruption) %>% 
+  addTiles() %>%
+  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions())
+```
+
+---
+
+```{r, echo=FALSE}
+leaflet(volcanic_eruption) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude.x, ~latitude.x,
+    radius = 3,
+    color = "red",
+    stroke = FALSE, fillOpacity = 0.4
+  )
+```
+
 ---
 class: inverse, middle, center
 
