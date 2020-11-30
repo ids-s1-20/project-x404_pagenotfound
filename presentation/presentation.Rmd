@@ -57,11 +57,8 @@ class: inverse, center, middle
 
 ---
 
-# Volcano Dataset
 
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
+background-image: (images/volcano.jpg)
 
 ---
 
