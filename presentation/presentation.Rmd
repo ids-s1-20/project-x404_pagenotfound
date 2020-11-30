@@ -3,7 +3,7 @@ title: "Factors affecting frequency of Volcanic eruptions"
 subtitle: "Presentation subtitle (if any)"
 author: "x404-pagenotfound <br> Emma, Bridget, Sachin"
 institute: "University of Edinburgh"
-date: "`r Sys.Date()`"
+date: "4 December 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs

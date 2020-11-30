@@ -214,6 +214,8 @@ leaflet(eruption_tecs) %>%
     fillOpacity = 0.4
   )
 ```
+## Crust type and techtonics research
+
 
 
 
