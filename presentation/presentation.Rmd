@@ -21,6 +21,14 @@ library(tidyverse)
 library(tidymodels)
 library(palmerpenguins)
 library(knitr)
+library(tidyverse)
+library(broom)
+library(janitor)
+library(glue)
+library(choroplethr)
+library(choroplethrMaps)
+library(leaflet)
+
 ```
 
 ```{r setup, include=FALSE}
@@ -30,7 +38,12 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 ```{r load-data, include=FALSE}
 # Load your data here
+setwd("/cloud/project/proposal")
+volcano <- read_csv("../data/volcano.csv")
+eruptions <- read_csv("../data/eruptions.csv")
+events <- read_csv("../data/events.csv")
 ```
+
 
 
 class: center, middle
@@ -41,11 +54,11 @@ class: center, middle
 
 class: inverse, center, middle
 
-# Section title
+# Volcano Dataset
 
 ---
 
-# Hello World
+# Volcano Dataset
 
 - Click the `Knit` button to compile your presentation
 
