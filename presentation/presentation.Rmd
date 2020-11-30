@@ -255,7 +255,8 @@ Limitations:
 
 volcanic_eruption %>%
   group_by(country, primary_volcano_type) %>%
-  mutate( freq_eruptions=n()) %>%
+   mutate( freq_eruptions=n(),
+          primary_volcano_type=if_else(primary_volcano_type=="Stratovolcano(es)", "Stratovolcano", primary_volcano_type) ) %>%
   arrange(desc(freq_eruptions)) %>%
   distinct(country, primary_volcano_type, freq_eruptions) %>%
   head(25)%>%
@@ -269,19 +270,21 @@ volcanic_eruption %>%
 ```
 ---
 # Bar chart frequency by volcano type
- ```{r eruptions-by-volcano-type, echo=FALSE}
+
+```{r eruptions-by-volcano-type, echo=FALSE}
 
 volcanic_eruption %>%
   group_by(primary_volcano_type) %>%
-  mutate( freq_eruptions=n()) %>%
+  mutate( freq_eruptions=n(),
+          primary_volcano_type=if_else(primary_volcano_type=="Stratovolcano(es)", "Stratovolcano", primary_volcano_type) ) %>%
   arrange(desc(freq_eruptions)) %>%
   distinct(primary_volcano_type, freq_eruptions) %>%
-  head(15)%>%
+  head(10)%>%
   ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),y=freq_eruptions,fill=primary_volcano_type)) +
   geom_col() +
   coord_flip() +
-  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions byVocano Type") #+
- # scale_fill_brewer(palette="YlOrRd")
+  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions byVocano Type") +
+  scale_fill_brewer(palette="YlOrRd")
 
 ```
 --- 
