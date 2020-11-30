@@ -44,6 +44,31 @@ eruptions <- read_csv("../data/eruptions.csv")
 events <- read_csv("../data/events.csv")
 ```
 
+```{r data-for-map, include=FALSE}
+#Join eruptions and volcano to match each eruption to its corresponding volcano
+volcanic_eruption <- left_join(volcano, eruptions, by="volcano_number")
+#load df with list of countries
+data("country.regions")
+#create CountVolc which stores number of eruptions for each country
+CountVolc = group_by(volcanic_eruption, country) %>% summarise(value = n())
+CountVolc = as.data.frame(CountVolc)
+CountVolc[,1] = tolower(CountVolc[,1])
+rownames(CountVolc) = CountVolc$country
+
+#some eruptions are on the border between two countries, so we split that count between each country
+CountVolc["chile","value"] = CountVolc["chile","value"] + CountVolc["chile-argentina","value"]/2
+CountVolc["argentina","value"] = CountVolc["argentina","value"] + CountVolc["chile-argentina","value"]/2
+
+#some country names must be changed to get the count
+CountVolc$country=gsub("united states", "united states of america", CountVolc$country)
+
+#Aggregating the counts into unique country names
+CountVolcUni <- group_by(CountVolc, country) %>%
+  summarise(value = sum(value))
+CountVolcUni = as.data.frame(CountVolcUni)
+rownames(CountVolcUni) = CountVolcUni$country
+
+```
 
 class: center, middle
 
@@ -58,10 +83,55 @@ class: inverse, center, middle
 ---
 
 
-background-image: (images/volcano.jpg)
+background-image: url(https://camo.githubusercontent.com/4295e3eef5545f83277639df7e7b73fa7de3bc5722c0da60d5ff44b6e1f3df8d/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f332f33342f4572757063692543332542336e5f656e5f656c5f766f6c632543332541316e5f536162616e636179612532435f5065722543332542412e6a70672f3132383070782d4572757063692543332542336e5f656e5f656c5f766f6c632543332541316e5f536162616e636179612532435f5065722543332542412e6a7067)
 
 ---
 
+```{r World-Map, echo=FALSE}
+#create tibble with rownames as countries
+CountVolcFake = country.regions
+CountVolcFake$value = 0
+rownames(CountVolcFake) = CountVolcFake$region
+#choose the countries in both tibbles
+ii=intersect(CountVolcUni$country,country.regions$region)
+CountVolcFake[ii, "value"] = (CountVolcUni[ii, "value"])
+#create choropleth map with palette
+country_choropleth(CountVolcFake, num_colors = 9) +
+scale_fill_brewer(palette="YlOrRd") +
+labs(title = "Number of Volcanic Eruptions by Country")
+
+
+
+
+#find countries that arent included
+MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
+```
+
+
+---
+
+```{r, echo=FALSE}
+set.seed(1)
+ran_rows <- sample(nrow(volcanic_eruption), 1000)
+leaflet(data = volcanic_eruption) %>% 
+  addTiles() %>%
+  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions())
+```
+
+---
+
+```{r, echo=FALSE}
+leaflet(volcanic_eruption) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude.x, ~latitude.x,
+    radius = 3,
+    color = "red",
+    stroke = FALSE, fillOpacity = 0.4
+  )
+```
+
+---
 class: inverse, middle, center
 
 # Using xaringan
@@ -301,6 +371,43 @@ leaflet(eruption_tecs) %>%
 # Model frequency by crust type
 ---
 # Bar chart frequency by country by volcano type
+
+```{r eruptions-by-country-and-volcano-type, echo=FALSE}
+
+volcanic_eruption %>%
+  group_by(country, primary_volcano_type) %>%
+  mutate( freq_eruptions=n()) %>%
+  arrange(desc(freq_eruptions)) %>%
+  distinct(country, primary_volcano_type, freq_eruptions) %>%
+  head(25)%>%
+  ggplot(aes(x=country,y=freq_eruptions)) +
+  geom_col(aes(fill=primary_volcano_type)) +
+  coord_flip() +
+  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions by Country", subtitle="and Vocano Type", fill="Primary Volcano Type") +
+  scale_fill_brewer(palette="YlOrRd")
+
+
+```
 ---
 # Bar chart frequency by volcano type
+ ```{r eruptions-by-volcano-type, echo=FALSE}
 
+volcanic_eruption %>%
+  group_by(primary_volcano_type) %>%
+  mutate( freq_eruptions=n()) %>%
+  arrange(desc(freq_eruptions)) %>%
+  distinct(primary_volcano_type, freq_eruptions) %>%
+  head(15)%>%
+  ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),y=freq_eruptions,fill=primary_volcano_type)) +
+  geom_col() +
+  coord_flip() +
+  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions byVocano Type") #+
+ # scale_fill_brewer(palette="YlOrRd")
+
+```
+--- 
+# Short Comings
+---
+# Conclusion
+---
+#Furture research/Investigation
