@@ -45,7 +45,6 @@ events <- read_csv("../data/events.csv")
 ```
 
 
-
 class: center, middle
 
 ## A statement of the overall goal / research question
@@ -207,3 +206,28 @@ Limitations:
 `xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
 
 - And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+---
+
+# Map eruptions
+
+---
+
+# Map eruptions interactive
+
+---
+
+# Model Frequency
+
+--- 
+# Map eruptions as data points compared with tectonic plates
+---
+# Map eruptions by tectonic plate type
+---
+# Model frequency by tectonic plate type
+---
+# Model frequency by crust type
+---
+# Bar chart frequency by country by volcano type
+---
+# Bar chart frequency by volcano type
+
