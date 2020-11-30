@@ -44,6 +44,31 @@ eruptions <- read_csv("../data/eruptions.csv")
 events <- read_csv("../data/events.csv")
 ```
 
+```{r data-for-map, include=FALSE}
+#Join eruptions and volcano to match each eruption to its corresponding volcano
+volcanic_eruption <- left_join(volcano, eruptions, by="volcano_number")
+#load df with list of countries
+data("country.regions")
+#create CountVolc which stores number of eruptions for each country
+CountVolc = group_by(volcanic_eruption, country) %>% summarise(value = n())
+CountVolc = as.data.frame(CountVolc)
+CountVolc[,1] = tolower(CountVolc[,1])
+rownames(CountVolc) = CountVolc$country
+
+#some eruptions are on the border between two countries, so we split that count between each country
+CountVolc["chile","value"] = CountVolc["chile","value"] + CountVolc["chile-argentina","value"]/2
+CountVolc["argentina","value"] = CountVolc["argentina","value"] + CountVolc["chile-argentina","value"]/2
+
+#some country names must be changed to get the count
+CountVolc$country=gsub("united states", "united states of america", CountVolc$country)
+
+#Aggregating the counts into unique country names
+CountVolcUni <- group_by(CountVolc, country) %>%
+  summarise(value = sum(value))
+CountVolcUni = as.data.frame(CountVolcUni)
+rownames(CountVolcUni) = CountVolcUni$country
+
+```
 
 class: center, middle
 
@@ -58,7 +83,7 @@ class: inverse, center, middle
 ---
 
 
-background-image: (images/volcano.jpg)
+background-image: (presentation_files/volcano.jpg)
 
 ---
 
