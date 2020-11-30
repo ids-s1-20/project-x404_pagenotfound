@@ -83,10 +83,55 @@ class: inverse, center, middle
 ---
 
 
-background-image: (presentation_files/volcano.jpg)
+background-image: url(https://camo.githubusercontent.com/4295e3eef5545f83277639df7e7b73fa7de3bc5722c0da60d5ff44b6e1f3df8d/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f332f33342f4572757063692543332542336e5f656e5f656c5f766f6c632543332541316e5f536162616e636179612532435f5065722543332542412e6a70672f3132383070782d4572757063692543332542336e5f656e5f656c5f766f6c632543332541316e5f536162616e636179612532435f5065722543332542412e6a7067)
 
 ---
 
+```{r World-Map, echo=FALSE}
+#create tibble with rownames as countries
+CountVolcFake = country.regions
+CountVolcFake$value = 0
+rownames(CountVolcFake) = CountVolcFake$region
+#choose the countries in both tibbles
+ii=intersect(CountVolcUni$country,country.regions$region)
+CountVolcFake[ii, "value"] = (CountVolcUni[ii, "value"])
+#create choropleth map with palette
+country_choropleth(CountVolcFake, num_colors = 9) +
+scale_fill_brewer(palette="YlOrRd") +
+labs(title = "Number of Volcanic Eruptions by Country")
+
+
+
+
+#find countries that arent included
+MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
+```
+
+
+---
+
+```{r, echo=FALSE}
+set.seed(1)
+ran_rows <- sample(nrow(volcanic_eruption), 1000)
+leaflet(data = volcanic_eruption) %>% 
+  addTiles() %>%
+  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions())
+```
+
+---
+
+```{r, echo=FALSE}
+leaflet(volcanic_eruption) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude.x, ~latitude.x,
+    radius = 3,
+    color = "red",
+    stroke = FALSE, fillOpacity = 0.4
+  )
+```
+
+---
 class: inverse, middle, center
 
 # Using xaringan
