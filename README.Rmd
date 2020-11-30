@@ -41,3 +41,11 @@ https://www.britannica.com/science/volcano <- Volcano types and explanations
 ## References
 
 List any references here. You should, at a minimum, list your data source.
+
+
+
+
+
+
+## Frequecy of Eruptions by Volcano Type
+This visualization shows the top 
