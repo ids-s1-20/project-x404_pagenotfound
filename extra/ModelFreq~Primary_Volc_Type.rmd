@@ -1,0 +1,72 @@
+---
+title: "model frequency~primary_volcano_type"
+author: "x404-pagenotfound"
+date: "30/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load Packages and Data
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(tidymodels)
+library(broom)
+library(broom)
+library(janitor)
+library(glue)
+library(choroplethr)
+library(choroplethrMaps)
+library(here)
+library(countrycode)
+```
+
+```{r read-in-data, message=FALSE}
+setwd("/cloud/project/proposal")
+volcano <- read_csv("../data/volcano.csv")
+eruptions <- read_csv("../data/eruptions.csv")
+events <- read_csv("../data/events.csv")
+
+```
+
+```{r primaryvolccount}
+
+count_by_volcano_type <- 
+  volcanic_eruption %>%
+  group_by(primary_volcano_type) %>%
+  mutate( freq_eruptions=n()) %>%
+  arrange(desc(freq_eruptions)) %>%
+  distinct(primary_volcano_type, freq_eruptions)
+
+count_by_volcano_type
+  
+```
+
+```{r model-frequency-primaryvolcanotype}
+
+fq_volcano_type_fit <-linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log(freq_eruptions)~primary_volcano_type, data=count_by_volcano_type)
+
+
+```
+
+```{r tidy-freq-continent-fit}
+tidy(fq_volcano_type_fit)
+```
+
+
+```{r residual-plot-freq-by-volcano-type}
+fq_volcano_type_fit_aug <- augment(fq_volcano_type_fit$fit)
+
+
+ggplot( fq_volcano_type_fit_aug, mapping=aes( x=.fitted, y =.resid)) +
+	geom_jitter(alpha=0.5) +
+	geom_hline(yintercept=log(0+0.00001), color="gray", lty="dashed" ) +
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals")
+
+
+```
