@@ -286,10 +286,86 @@ Limitations:
 # Model Frequency
 
 --- 
+
 # Map eruptions as data points compared with tectonic plates
+
 ---
+
 # Map eruptions by tectonic plate type
+
+```{r seperate-techtonics, echo=FALSE}
+volcano_tecs <- volcano%>%
+  #filter out Vitim Volcanic Field volcano as tec settings are unknown
+  filter(tectonic_settings != "Unknown")%>%
+  #seperate the tec setting from the crust 
+  separate(tectonic_settings, c("techtonic_setting", "crust"),
+                    sep = "([/])")
+  
+```
+
+```{r eruption-frequency, echo=FALSE}
+eruption_tecs<- left_join(volcano_tecs, eruptions,
+                          by=c("volcano_number", "volcano_name",
+                               "latitude", "longitude"))
+  
+eruption_tecs_fqncy <- eruption_tecs%>%
+  count(volcano_number, volcano_name, techtonic_setting, crust) %>% 
+  mutate(frequency = as.factor(n))%>%
+  #str_trim("crust", side = "left")%>%
+  #ideally remove whitespace for easier use but leave for later
+  filter(crust != " Crustal thickness unknown")
+  
+
+  
+```
+
+```{r tec-map, echo = FALSE}
+tec_pal<- colorFactor(
+  palette = c("#a50026", "#313695", "#4d9221"),
+  domain = eruption_tecs$techtonic_setting
+)
+#red=intraplate
+#blue=riftzone
+#green=subductionzone
+
+
+leaflet(eruption_tecs) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude,
+    radius = 3,
+    color = ~tec_pal(techtonic_setting),
+    stroke = FALSE, 
+    fillOpacity = 0.4
+  )
+```
 ---
+
+# Map of Crust type
+
+```{r crust-map, echo=FALSE}
+crust_pal<- colorFactor(
+  palette = c("#d73027", "#762a83", "#fee090", "#4575b4"),
+  domain = eruption_tecs$crust
+)
+#red=continental
+#yellow=intermediate
+#blue=oceanic
+#purple=unknown
+
+
+leaflet(eruption_tecs) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude,
+    radius = 3,
+    color = ~crust_pal(crust),
+    stroke = FALSE, 
+    fillOpacity = 0.4
+  )
+```
+---
+
 # Model frequency by tectonic plate type
 ---
 # Model frequency by crust type
