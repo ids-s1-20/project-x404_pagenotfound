@@ -278,8 +278,17 @@ volcano %>%
 # Short Comings
 -A lot of NAs in the event table around dates, due to some ancient volcanic eruptions being recorded
 -Also several eruptions are ongoing in the world, therefore finish date not recorded
-- Therefore we could not investigate what factors affect the length of eruptions like we had initially proposed, which lead us to writing a reproposal. 
+- Therefore we could not investigate what factors affect the length of eruptions like we had initially proposed, which lead us to writing a re-proposal. 
 ---
 # Conclusion
+We believe the factors which affect volcanic eruptions according to our investigation are : 
+-Location of volcano (position on tectonic plate)
+-Tectonic Plate Setting
+-Tectonic Plate Type
+-Crust Type
+-Primary Volcano Type
+
+We also hypothesize that there may be a relationship between these factors, based on our findings.
 ---
 #Future research/Investigation
+- Investigate the relationship between the factors which affect the volcanic eruptions - cause them to arise, how frequently they arise etc
