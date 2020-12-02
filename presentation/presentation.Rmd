@@ -276,6 +276,9 @@ volcano %>%
 
 ---
 # Short Comings
+-A lot of NAs in the event table around dates, due to some ancient volcanic eruptions being recorded
+-Also several eruptions are ongoing in the world, therefore finish date not recorded
+- Therefore we could not investigate what factors affect the length of eruptions like we had initially proposed, which lead us to writing a reproposal. 
 ---
 # Conclusion
 ---
