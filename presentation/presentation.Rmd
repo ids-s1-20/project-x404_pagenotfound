@@ -218,35 +218,23 @@ leaflet(eruption_tecs) %>%
 ---
 # Model frequency by crust type
 ---
+# Bar chart frequency by country by volcano type
 
-```{r eruptions-by-volcano-type, echo=FALSE}
+```{r eruptions-by-country-and-volcano-type, echo=FALSE}
 
-volcano %>%
-  group_by(primary_volcano_type) %>%
-  mutate( primary_volcano_type=case_when(
-    primary_volcano_type=="Stratovolcano(es)"~"Stratovolcano",
-    primary_volcano_type=="Shield(s)"~"Shield",
-    primary_volcano_type=="Pyroclastic cone(s)"~"Pyroclastic cone",
-    TRUE ~ primary_volcano_type
-    
-    )) %>%
-  ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),fill=primary_volcano_type)) +
-  geom_bar() +
+volcanic_eruption %>%
+  group_by(country, primary_volcano_type) %>%
+   mutate( freq_eruptions=n(),
+          primary_volcano_type=if_else(primary_volcano_type=="Stratovolcano(es)", "Stratovolcano", primary_volcano_type) ) %>%
+  arrange(desc(freq_eruptions)) %>%
+  distinct(country, primary_volcano_type, freq_eruptions) %>%
+  head(25)%>%
+  ggplot(aes(x=country,y=freq_eruptions)) +
+  geom_col(aes(fill=primary_volcano_type)) +
   coord_flip() +
-  labs(x="Primary Volcano Type",y="Count", title="Frequency of Eruptions by Vocano Type")
+  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions by Country", subtitle="and Vocano Type", fill="Primary Volcano Type") +
+  scale_fill_brewer(palette="YlOrRd")
 
-```
-```{r} 
-volcano_type_count <- volcano %>%
-  group_by(primary_volcano_type) %>%
-  mutate
-( primary_volcano_type=case_when(
-    primary_volcano_type=="Stratovolcano(es)"~"Stratovolcano",
-    primary_volcano_type=="Shield(s)"~"Shield",
-    primary_volcano_type=="Pyroclastic cone(s)"~"Pyroclastic cone",
-    TRUE ~ primary_volcano_type
-    ),
-  number_volcanoes=n()) 
 
 ```
 ---
@@ -268,29 +256,25 @@ volcanic_eruption %>%
   scale_fill_brewer(palette="YlOrRd")
 
 ```
-
 ---
-# Bar chart frequency by country by volcano type
+```{r count-volcanoes-by-volcano-type, echo=FALSE}
 
-```{r eruptions-by-country-and-volcano-type, echo=FALSE}
-
-volcanic_eruption %>%
-  group_by(country, primary_volcano_type) %>%
-   mutate( freq_eruptions=n(),
-          primary_volcano_type=if_else(primary_volcano_type=="Stratovolcano(es)", "Stratovolcano", primary_volcano_type) ) %>%
-  arrange(desc(freq_eruptions)) %>%
-  distinct(country, primary_volcano_type, freq_eruptions) %>%
-  head(25)%>%
-  ggplot(aes(x=country,y=freq_eruptions)) +
-  geom_col(aes(fill=primary_volcano_type)) +
+volcano %>%
+  group_by(primary_volcano_type) %>%
+  mutate( primary_volcano_type=case_when(
+    primary_volcano_type=="Stratovolcano(es)"~"Stratovolcano",
+    primary_volcano_type=="Shield(s)"~"Shield",
+    primary_volcano_type=="Pyroclastic cone(s)"~"Pyroclastic cone",
+    TRUE ~ primary_volcano_type
+    )) %>%
+  ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),fill=primary_volcano_type)) +
+  geom_bar() +
   coord_flip() +
-  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions by Country", subtitle="and Vocano Type", fill="Primary Volcano Type") +
-  scale_fill_brewer(palette="YlOrRd")
-
+  labs(x="Primary Volcano Type",y="Count", title="Number of Volcanoes by Vocano Type")
 
 ```
----
 
+---
 # Short Comings
 ---
 # Conclusion
