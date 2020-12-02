@@ -139,6 +139,57 @@ leaflet(volcanic_eruption) %>%
 
 ---
 
+#Tectonics Explanation (brief geography lesson)
+
+---
+
+#Earth's Structure
+
+Earths Structure:
+The earth is formed of 4 layers, 
+the crust, 
+the mantle, 
+the inner and outer core. 
+
+In terms of volcano formation we are only really concerned with the crust and mantle.
+
+The crust is the top layer (the one we live on) which is a relatively thin layer of solid rock. This is split into sections known as tectonic plates which lie on top of the mantle- the second outermost layer formed of partially molten rock (magma) which moves very slowly. This causes the plates to move (only about a couple of cm per year) which, depending on the direction of movement can cause earthquakes and volcano formation. 
+
+---
+
+#Plates and Crust type
+The crust variable refers to the crust type and thickness of the plate the volcano is on,
+In our data there are four categories:
+
+Continental () (land) 
+
+Oceanic (sea)
+
+Intermediate
+
+Unknown 
+
+Continental crust is much thicker than oceanic crust however oceanic crust is made of much denser rock than continental plates making them heavier despite their thin composition.
+
+After research it is still unclear what intermediate crust is however by observing the data they appear to categorize the crust type by thickness so it is potentially a collection of volcanos  thicker than average oceanic crust and thinner than average continental crust.
+
+---
+
+#Tectonic Settings
+
+The tectonic setting of a volcano is the movements of the plates that has caused the formation of the given volcano. There are three different tectonic settings in the dataset:
+
+*Subduction zone:* 
+This when a continental and oceanic plate move towards each other, the heavier oceanic plate moves beneath the lighter continental plate, down into the mantle. This creates more magma and pressure near the surface which works its way through the continental plate to form a volcano.
+
+*Rift zone:* 
+This is when two plates are moving away from each other forming a gap in the crust which magma moves up through to form a volcano.
+
+*Intraplate:* 
+These form when there is a much hotter area of the mantle, causing the magma to rise to the surface where it is then pushed through the crust to form a volcano on the surface.
+
+---
+
 # Map eruptions by tectonic plate type
 
 ```{r seperate-techtonics, echo=FALSE}
@@ -214,10 +265,139 @@ leaflet(eruption_tecs) %>%
 ```
 ---
 
-# Model frequency by tectonic plate type
----
 # Model frequency by crust type
+
+A linear model was initially fit to the data to try to predict how many times the volcano would erupt depending on the crust type.
+
+Coefficients:
+                        (Intercept)  
+                             10.103  
+crust Intermediate crust (15-25 km)  
+                             -3.345  
+      crust Oceanic crust (< 15 km)  
+                              2.766  
+
+The output shows that for all else held constant, we would expect:
+
+-A volcano on continental crust to erupt an average of 10.103 times
+
+-A volcano on intermediate crust to erupt an average of 3.345 less times than that of a continental crust
+
+-A volcano on oceanic crust to erupt an average of 2.766 more times than that of a continental crust.
+
 ---
+
+#However...
+
+The residuals plot shows three distinct clusters of data for each different crust type:
+```{r crust-model, echo= FALSE}
+crust_fit <- 
+linear_reg()%>%
+  set_engine("lm")%>%
+  fit(n ~ crust, data= eruption_tecs_fqncy)
+
+```
+```{r crust-fit-residuals, echo= FALSE}
+crust_fit_aug <- augment(crust_fit$fit)
+
+ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid, colour = crust)) +
+	geom_jitter(alpha=0.8) +
+	geom_hline(yintercept=0, color="gray", lty="dashed" )+ 
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals", colour = "Crust type (thickness)")+
+  scale_colour_manual(values = c(
+    " Continental crust (>25 km)" = "#d73027",
+    " Oceanic crust (< 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))
+```
+
+---
+#Adjusted R Squared
+
+In addition, the adjusted R squared value for this model was 0.002351574, meaning the model is only accurate for a very small proportion of the data.
+
+
+The two separate evaluations allowed us to conclude that the linear model was unsuitable for the data in hand.
+
+---
+# Model frequency by tectonic setting
+
+When modeling frequency by tectonic setting we encountered a very similar occurence.
+
+Whilst the output of the model provided us with plausible values;
+
+The adjusted R squared value was 0.01215089, again only accounting for a very small portion of the data.
+
+---
+
+The residuals plot was again split into 3 clusters, one for each tectonic setting.
+
+```{r tec_setting-model, echo=FALSE}
+tec_fit <- linear_reg()%>%
+  set_engine("lm")%>%
+  fit(n ~ techtonic_setting, data= eruption_tecs_fqncy)
+```
+
+```{r tec_setting-residuals, echo=FALSE}
+tec_fit_aug <- augment(tec_fit$fit)
+
+ggplot(tec_fit_aug, mapping=aes( x=.fitted, y =.resid, 
+                                 colour = techtonic_setting)) +
+	geom_jitter(alpha=0.8) +
+	geom_hline(yintercept=0, color="gray", lty="dashed" )+
+	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals",
+	     colour = "Tectonic Setting")+
+    scale_colour_manual(values = c(
+    "Intraplate " = "#a50026",
+    "Rift zone " = "#313695",
+    "Subduction zone " = "#4d9221"))
+```
+
+---
+# What we decided
+
+We decided that linear models weren't effective and could provide an adequate explanation of the frequency of eruptions through bar charts showing the count on each plate
+
+---
+
+# Count on each crust
+
+```{r viz, echo=FALSE}
+eruption_tecs_fqncy%>%
+  group_by(crust)%>%
+  ggplot(aes(y = fct_rev(fct_infreq(crust)), fill = crust))+
+  geom_bar()+
+  labs(y = "Crust Type (thickness)",
+       x = "Eruptions", 
+       title = "Frequency of eruptions on different crusts")+
+  scale_fill_manual(values = c(
+    " Continental crust (>25 km)" = "#d73027",
+    " Oceanic crust (< 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))+
+  guides(fill = FALSE)
+```  
+
+---
+
+# Count for each tectonic setting
+
+```{r viz2, echo = FALSE}
+eruption_tecs_fqncy%>%
+  group_by(techtonic_setting)%>%
+  ggplot(aes(y = techtonic_setting, fill = techtonic_setting))+
+  geom_bar()+
+    labs(y = "Tectonic Setting",
+       x = "Eruptions", 
+       title = "Frequency of eruptions for different tectonic settings")+
+  scale_fill_manual(values = c(
+    "Intraplate " = "#a50026",
+    "Rift zone " = "#313695",
+    "Subduction zone " = "#4d9221"))+
+  guides(fill = FALSE)
+  
+
+```
+---
+
 # Bar chart frequency by country by volcano type
 
 ```{r eruptions-by-country-and-volcano-type, echo=FALSE}
