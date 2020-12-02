@@ -432,13 +432,43 @@ volcanic_eruption %>%
   ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),y=freq_eruptions,fill=primary_volcano_type)) +
   geom_col() +
   coord_flip() +
-  labs(x="Country",y="Number of Eruptions", title="Frequency of Eruptions byVocano Type") +
+  labs(x="Primary Volcano Type",y="Number of Eruptions", title="Frequency of Eruptions by Vocano Type") +
   scale_fill_brewer(palette="YlOrRd")
 
 ```
---- 
+---
+```{r count-volcanoes-by-volcano-type, echo=FALSE}
+
+volcano %>%
+  group_by(primary_volcano_type) %>%
+  mutate( primary_volcano_type=case_when(
+    primary_volcano_type=="Stratovolcano(es)"~"Stratovolcano",
+    primary_volcano_type=="Shield(s)"~"Shield",
+    primary_volcano_type=="Pyroclastic cone(s)"~"Pyroclastic cone",
+    TRUE ~ primary_volcano_type
+    )) %>%
+  ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),fill=primary_volcano_type)) +
+  geom_bar() +
+  coord_flip() +
+  labs(x="Primary Volcano Type",y="Count", title="Number of Volcanoes by Vocano Type")
+
+```
+
+---
 # Short Comings
+-A lot of NAs in the event table around dates, due to some ancient volcanic eruptions being recorded
+-Also several eruptions are ongoing in the world, therefore finish date not recorded
+- Therefore we could not investigate what factors affect the length of eruptions like we had initially proposed, which lead us to writing a re-proposal. 
 ---
 # Conclusion
+We believe the factors which affect volcanic eruptions according to our investigation are : 
+-Location of volcano (position on tectonic plate)
+-Tectonic Plate Setting
+-Tectonic Plate Type
+-Crust Type
+-Primary Volcano Type
+
+We also hypothesize that there may be a relationship between these factors, based on our findings.
 ---
-#Furture research/Investigation
+#Future research/Investigation
+- Investigate the relationship between the factors which affect the volcanic eruptions - cause them to arise, how frequently they arise etc
