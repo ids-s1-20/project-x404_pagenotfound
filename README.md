@@ -6,14 +6,13 @@ x404-pagenotfound
 
 We chose to research what factors affect the frequency of volcanic eruptions.
 
-The data we are analyzing comes from the tidytuesdy package, and was collected by the Smithsonian's Global Volcanism
-Program. To explore the factors affecting volcanic eruptions, we used 2 data frames, one of which listed every
-volcano on the planet, giving its position, name, number...etc, while the other data set listed every recorded
-volcanic eruption, and included name, number, year...etc. Both dataframes have far too many variables to explore,
-so we decided to focus on factors like position, country, crust type, and tectonic setting. 
+The data we are analyzing comes from the tidytuesdy package, and was collected by the Smithsonian's Global Volcanism Program. To explore the factors affecting volcanic eruptions, we used 2 data frames, one of which listed every volcano on the planet, giving its position, name, number...etc, while the other data set listed every recorded volcanic eruption. Both dataframes have far too many variables to explore, so we decided to focus on factors like position, country, crust type, and tectonic setting.
 
+Now, the easiest visualization to spot trends by location is obviously a world map, so we will start there. To get an idea of which countries have had the most volcanic eruptions, we created a choropleth map which shows number of eruptions by country. Now, this is helpful, but it is impossible to see any trend, because we can't see groups of eruptions within the countries. Also, as you can see from the scale, this map only gives a rough idea of where the most eruptions happen.
 
+So to solve this, we create a clustered world map. Now the patterns a becoming a little more apparent. For example, we can now see that most of the large clusters of eruptions are circled around the pacific ocean. Our hypothesis as to why these trends exist had to do with tectonic plates.
 
+So we layered a map of the tectonic borders on to the points, and as you can see, there is an clear pattern. Most of the eruptions took place along a tectonic border, which isn't surprising because volcanoes are formed by the clashing of two plates. The circle of volcanoes around the pacific that we saw earlier is a result of the pacific plate, and is actually called the Pacific Ring of Fire. So just by looking at the maps, we can see that location has a big effect on the count of eruptions in a given area.
 
 ## Presentation
 
