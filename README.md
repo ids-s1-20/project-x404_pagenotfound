@@ -4,6 +4,17 @@ x404-pagenotfound
 
 ## Summary
 
+We chose to research what factors affect the frequency of volcanic eruptions.
+
+The data we are analyzing comes from the tidytuesdy package, and was collected by the Smithsonian's Global Volcanism
+Program. To explore the factors affecting volcanic eruptions, we used 2 data frames, one of which listed every
+volcano on the planet, giving its position, name, number...etc, while the other data set listed every recorded
+volcanic eruption, and included name, number, year...etc. Both dataframes have far too many variables to explore,
+so we decided to focus on factors like position, country, crust type, and tectonic setting. 
+
+
+
+
 Write-up of your project and findings go here. Think of this as the text
 of your presentation. The length should be roughly 5 minutes when read
 out loud. Although pacing varies, a 5-minute speech is roughly 750
