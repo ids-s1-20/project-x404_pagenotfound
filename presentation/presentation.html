@@ -46,18 +46,17 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## What factors affect the frequency of volcanic eruptions?
 
----
-
-class: inverse, center, middle
-
-# Volcano Dataset
 
 ---
 
 
 background-image: url(https://camo.githubusercontent.com/4295e3eef5545f83277639df7e7b73fa7de3bc5722c0da60d5ff44b6e1f3df8d/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f332f33342f4572757063692543332542336e5f656e5f656c5f766f6c632543332541316e5f536162616e636179612532435f5065722543332542412e6a70672f3132383070782d4572757063692543332542336e5f656e5f656c5f766f6c632543332541316e5f536162616e636179612532435f5065722543332542412e6a7067)
+
+class: inverse, center, middle
+
+# Volcano Data Set
 
 ---
 # World Map showing Number of Volcanic Eruptions
@@ -234,6 +233,27 @@ The residuals plot was again split into 3 clusters, one for each tectonic settin
 
 ## Eruptions by year by crust
 
+<<<<<<< HEAD
+=======
+```r
+#eruption_tecs%&gt;%
+ # group_by(start_year)%&gt;%
+ # count(start_year)
+
+
+eruption_tecs%&gt;%
+  group_by(crust)%&gt;%
+  filter(crust != " Crustal thickness unknown")%&gt;%
+  ggplot(aes(x= start_year,
+             fill = crust))+
+           geom_histogram(binwidth = 2000)+
+    scale_fill_manual(values = c(
+    " Continental crust (&gt;25 km)" = "#d73027",
+    " Oceanic crust (&lt; 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))
+```
+
+>>>>>>> 9b6b5925ed975ad6c6a2054cb0f8278d432f2cb6
 ```
 ## Warning: Removed 262 rows containing non-finite values (stat_bin).
 ```
