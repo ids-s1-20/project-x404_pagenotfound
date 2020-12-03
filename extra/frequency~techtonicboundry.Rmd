@@ -244,10 +244,39 @@ This is when two plates are moving away from each other forming a gap in the cru
 Intraplate
 These form when there is a much hotter area of the mantle, causing the magma to rise to the surface where it is then pushed through the crust to form a volcano on the surface.
 
+## Eruptions by year by crust
+```{r eruptions-by-year-crust}
+
+eruption_tecs%>%
+  group_by(crust)%>%
+  filter(crust != " Crustal thickness unknown")%>%
+  ggplot(aes(x= start_year,
+             fill = crust))+
+           geom_histogram(binwidth = 2000)+
+    scale_fill_manual(values = c(
+    " Continental crust (>25 km)" = "#d73027",
+    " Oceanic crust (< 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))
+  
+  
+
+```
 
 
+##Linear model take 2
+
+```{r lin-model-2}
+tec_fit_2 <- linear_reg()%>%
+  set_engine("lm")%>%
+  fit(n ~ techtonic_setting + crust, data= eruption_tecs_fqncy)
+
+#adj r squared
+glance(tec_fit_2)$adj.r.squared
+
+#nope
 
 
+```
 
 
 

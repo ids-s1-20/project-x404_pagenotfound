@@ -88,6 +88,8 @@ background-image: url(https://camo.githubusercontent.com/4295e3eef5545f83277639d
 
 ---
 
+class: inverse, center, middle
+
 #Tectonics Explanation (brief geography lesson)
 
 ---
@@ -110,13 +112,13 @@ The crust is the top layer (the one we live on) which is a relatively thin layer
 The crust variable refers to the crust type and thickness of the plate the volcano is on,
 In our data there are four categories:
 
-Continental () (land) 
+-Continental (&gt;25 km)- land plates 
 
-Oceanic (sea)
+-Oceanic (&lt; 15 km)- sea plates
 
-Intermediate
+-Intermediate (15-25 km)
 
-Unknown 
+-Unknown 
 
 Continental crust is much thicker than oceanic crust however oceanic crust is made of much denser rock than continental plates making them heavier despite their thin composition.
 
@@ -178,7 +180,6 @@ The output shows that for all else held constant, we would expect:
 ---
 
 #However...
-
 The residuals plot shows three distinct clusters of data for each different crust type:
 
 &lt;img src="presentation_files/figure-html/crust-fit-residuals-1.png" width="80%" /&gt;
@@ -219,11 +220,13 @@ We decided that linear models weren't effective and could provide an adequate ex
 
 &lt;img src="presentation_files/figure-html/viz-1.png" width="80%" /&gt;
 
+
 ---
 
 # Count for each tectonic setting
 
 &lt;img src="presentation_files/figure-html/viz2-1.png" width="80%" /&gt;
+
 ---
 
 # Bar chart frequency by country by volcano type
@@ -238,10 +241,22 @@ We decided that linear models weren't effective and could provide an adequate ex
 
 ---
 # Short Comings
+-A lot of NAs in the event table around dates, due to some ancient volcanic eruptions being recorded
+-Also several eruptions are ongoing in the world, therefore finish date not recorded
+- Therefore we could not investigate what factors affect the length of eruptions like we had initially proposed, which lead us to writing a re-proposal. 
 ---
 # Conclusion
+We believe the factors which affect volcanic eruptions according to our investigation are : 
+-Location of volcano (position on tectonic plate)
+-Tectonic Plate Setting
+-Tectonic Plate Type
+-Crust Type
+-Primary Volcano Type
+
+We also hypothesize that there may be a relationship between these factors, based on our findings.
 ---
 #Future research/Investigation
+- Investigate the relationship between the factors which affect the volcanic eruptions - cause them to arise, how frequently they arise etc
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
