@@ -223,6 +223,34 @@ We decided that linear models weren't effective and could provide an adequate ex
 
 ---
 
+## Eruptions by year by crust
+
+```r
+#eruption_tecs%&gt;%
+ # group_by(start_year)%&gt;%
+ # count(start_year)
+
+
+eruption_tecs%&gt;%
+  group_by(crust)%&gt;%
+  filter(crust != " Crustal thickness unknown")%&gt;%
+  ggplot(aes(x= start_year,
+             fill = crust))+
+           geom_histogram(binwidth = 2000)+
+    scale_fill_manual(values = c(
+    " Continental crust (&gt;25 km)" = "#d73027",
+    " Oceanic crust (&lt; 15 km)" = "#4575b4",
+    " Intermediate crust (15-25 km)" = "#fee090"))
+```
+
+```
+## Warning: Removed 262 rows containing non-finite values (stat_bin).
+```
+
+&lt;img src="presentation_files/figure-html/eruptions-by-year-crust-1.png" width="80%" /&gt;
+
+---
+
 # Count for each tectonic setting
 
 &lt;img src="presentation_files/figure-html/viz2-1.png" width="80%" /&gt;
