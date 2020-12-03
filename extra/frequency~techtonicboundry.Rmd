@@ -281,10 +281,31 @@ glance(tec_fit_2)$adj.r.squared
 
 
 
+Earths Structure:
+The earth is formed of 4 layers; 
+the crust, 
+the mantle, 
+the inner and outer core. 
+
+In terms of volcano formation we are only really concerned with the crust and mantle.
+
+The crust is the top layer (the one we live on) which is a relatively thin layer of solid rock. This is split into sections known as tectonic plates which lie on top of the mantle- the second outermost layer formed of partially molten rock (magma) which moves very slowly.
+```{r earth structure, echo = FALSE, out.width = "40%", fig.align = "center", fig.cap = "Image credit: BBC Bitesize- Structure of the Earth"} 
+
+include_graphics("https://bam.files.bbci.co.uk/bam/live/content/zfpy3k7/large") 
+
+``` 
 
 
+Continental crust is much thicker than oceanic crust however oceanic crust is made of much denser rock than continental plates making them heavier despite their thin composition.
 
+This when a continental and oceanic plate move towards each other, the heavier oceanic plate moves beneath the lighter continental plate, down into the mantle. This creates more magma and pressure near the surface which works its way through the continental plate to form a volcano.
 
+This is when two plates are moving away from each other forming a gap in the crust which magma moves up through to form a volcano.
+
+These form when there is a much hotter area of the mantle, causing the magma to rise to the surface where it is then pushed through the crust to form a volcano on the surface.
+
+ fig.align = "center",
 
 
 
