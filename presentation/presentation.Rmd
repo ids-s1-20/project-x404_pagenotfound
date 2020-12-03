@@ -27,7 +27,8 @@ library(glue)
 library(choroplethr)
 library(choroplethrMaps)
 library(leaflet)
-library(xaringan)
+library(rgdal)
+
 ```
 
 ```{r setup, include=FALSE}
@@ -118,21 +119,41 @@ leaflet(data = volcanic_eruption) %>%
 ```
 
 ---
+```{r, include=FALSE}
+my_spdf <- readOGR("/cloud/project/presentation/presentation_files/tectonicplates-master/PB2002_plates.shp")
+```
 
 ```{r, echo=FALSE}
+beatCol <- colorFactor(palette = 'RdYlGn', factor(volcanic_eruption$vei))
+
 leaflet(volcanic_eruption) %>% 
   addTiles() %>%
   addCircleMarkers(
     ~longitude.x, ~latitude.x,
-    radius = 3,
-    color = "red",
+    radius = ~sqrt(volcanic_eruption$vei*5),
+    color = "red",#~beatCol(factor(volcanic_eruption$vei)),
     stroke = FALSE, fillOpacity = 0.4
-  )
+  ) %>% 
+  addPolylines(data = my_spdf, weight = 2) %>%
+  setView(-1.479538, 53.380851, zoom = 3)
 ```
 
-![tectonicmap](images/tectonicplatesmap.png)
---- 
+```{r}
+leaflet(subset(volcanic_eruption, vei ==2)) %>% 
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude.x, ~latitude.x,
+    radius = 3,
+    color = "red",#~beatCol(factor(volcanic_eruption$vei)),
+    stroke = FALSE, fillOpacity = 0.4
+  ) %>% 
+  addPolylines(data = my_spdf, weight = 2) %>%
+  setView(-1.479538, 53.380851, zoom = 3)
+```
 
+
+
+---
 # Map eruptions as data points compared with tectonic plates
 
 ---
