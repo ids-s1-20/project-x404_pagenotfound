@@ -33,65 +33,6 @@ make is about the code itself. Your results with proper output and
 graphics go in your presentation, this space is for a brief summary of
 your project.
 
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
-
-    ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-    ## ✓ tibble  3.0.4     ✓ dplyr   1.0.2
-    ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-    ## ✓ readr   1.3.1     ✓ forcats 0.5.0
-
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   .default = col_character(),
-    ##   volcano_number = col_double(),
-    ##   latitude = col_double(),
-    ##   longitude = col_double(),
-    ##   elevation = col_double(),
-    ##   population_within_5_km = col_double(),
-    ##   population_within_10_km = col_double(),
-    ##   population_within_30_km = col_double(),
-    ##   population_within_100_km = col_double()
-    ## )
-
-    ## See spec(...) for full column specifications.
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   volcano_number = col_double(),
-    ##   volcano_name = col_character(),
-    ##   eruption_number = col_double(),
-    ##   eruption_category = col_character(),
-    ##   area_of_activity = col_character(),
-    ##   vei = col_double(),
-    ##   start_year = col_double(),
-    ##   start_month = col_double(),
-    ##   start_day = col_double(),
-    ##   evidence_method_dating = col_character(),
-    ##   end_year = col_double(),
-    ##   end_month = col_double(),
-    ##   end_day = col_double(),
-    ##   latitude = col_double(),
-    ##   longitude = col_double()
-    ## )
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   volcano_number = col_double(),
-    ##   volcano_name = col_character(),
-    ##   eruption_number = col_double(),
-    ##   eruption_start_year = col_double(),
-    ##   event_number = col_double(),
-    ##   event_type = col_character(),
-    ##   event_remarks = col_character(),
-    ##   event_date_year = col_double(),
-    ##   event_date_month = col_double(),
-    ##   event_date_day = col_double()
-    ## )
-
 ## Presentation
 
 Our presentation can be found [here](presentation/presentation.html).
