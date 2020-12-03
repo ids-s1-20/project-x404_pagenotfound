@@ -39,6 +39,8 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
+Mock, T 2020, "Volcano Eruptions", electronic dataset, Global Volcanism Program/Smithsonian Institution, viewed 4 December 2020, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
+
 Include a citation for your data here. See
 <http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
 on proper citation for datasets. If you got your data off the web, make
@@ -49,8 +51,10 @@ explanations
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+- https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md
+- https://rstudio.github.io/leaflet/markers.html
+- https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/
+- 
 
 ## Modelling frequency by crust type and frequency by tectonic setting
 
