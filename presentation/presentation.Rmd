@@ -27,7 +27,7 @@ library(glue)
 library(choroplethr)
 library(choroplethrMaps)
 library(leaflet)
-
+library(xaringan)
 ```
 
 ```{r setup, include=FALSE}
@@ -86,7 +86,7 @@ class: inverse, center, middle
 ---
 # World Map showing Number of Volcanic Eruptions
 
-```{r World-Map, echo=FALSE}
+```{r World-Map, echo=FALSE, warning=FALSE, message=FALSE}
 #create tibble with rownames as countries
 CountVolcFake = country.regions
 CountVolcFake$value = 0
@@ -130,7 +130,7 @@ leaflet(volcanic_eruption) %>%
   )
 ```
 
-
+![tectonicmap](images/tectonicplatesmap.png)
 --- 
 
 # Map eruptions as data points compared with tectonic plates
