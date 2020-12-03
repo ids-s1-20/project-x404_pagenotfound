@@ -118,7 +118,8 @@ set.seed(1)
 ran_rows <- sample(nrow(volcanic_eruption), 1000) #random sample for testing
 leaflet(data = volcanic_eruption) %>% 
   addTiles() %>%
-  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions())
+  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions()) %>%
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 
 ---
@@ -129,16 +130,16 @@ my_spdf <- readOGR("/cloud/project/presentation/presentation_files/tectonicplate
 ```{r, echo=FALSE}
 beatCol <- colorFactor(palette = 'RdYlGn', factor(volcanic_eruption$vei)) #random color palette for plotting by magnitude (vei)
 
-leaflet(volcanic_eruption) %>% 
+leaflet(volcanic_eruption) %>%
   addTiles() %>% # get map tiles from google maps
   addCircleMarkers( #add points
     ~longitude.x, ~latitude.x,
     radius = ~sqrt(volcanic_eruption$vei*5), #radius of points depends on eruption magnitude
     color = "red",#~beatCol(factor(volcanic_eruption$vei)) will be used if we want to color by magnitude
     stroke = FALSE, fillOpacity = 0.4
-  ) %>% 
+  ) %>%
   addPolylines(data = my_spdf, weight = 2) %>% #add tectonic boundaries
-  setView(-1.479538, 53.380851, zoom = 3) #set starting view and zoom
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 
 ```{r Proof-that-magnitude-isnt-correlated-to-position, include=FALSE}
@@ -266,7 +267,8 @@ leaflet(eruption_tecs) %>%
     color = ~tec_pal(techtonic_setting),
     stroke = FALSE, 
     fillOpacity = 0.4
-  )
+  ) %>%
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 ---
 
@@ -291,7 +293,8 @@ leaflet(eruption_tecs) %>%
     color = ~crust_pal(crust),
     stroke = FALSE, 
     fillOpacity = 0.4
-  )
+  ) %>%
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 ---
 
