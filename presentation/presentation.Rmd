@@ -429,6 +429,7 @@ eruption_tecs_fqncy%>%
 
 # Bar chart frequency by country by volcano type
 
+
 ```{r eruptions-by-country-and-volcano-type, echo=FALSE}
 
 volcanic_eruption %>%
@@ -446,6 +447,7 @@ volcanic_eruption %>%
 
 
 ```
+
 ---
 # Bar chart frequency by volcano type
 
@@ -465,6 +467,8 @@ volcanic_eruption %>%
   scale_fill_brewer(palette="YlOrRd")
 
 ```
+
+
 ---
 ```{r count-volcanoes-by-volcano-type, echo=FALSE}
 
@@ -479,7 +483,8 @@ volcano %>%
   ggplot(aes(x=fct_rev(as.factor(primary_volcano_type)),fill=primary_volcano_type)) +
   geom_bar() +
   coord_flip() +
-  labs(x="Primary Volcano Type",y="Count", title="Number of Volcanoes by Vocano Type")
+  labs(x="Primary Volcano Type",y="Count", title="Number of Volcanoes by Vocano Type") +
+  guides(fill=FALSE)
 
 ```
 
