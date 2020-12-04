@@ -83,15 +83,15 @@ with eruptions almost evenly split between strato and shield volcanoes.
 If we look at the countries of South America; Mexico,Equador,Costa Rica
 and Chile, they all have a relatively similar number of eruptions,
 solely composed of strato volcanoes. This backs up our conclusion that
-tectonic plate type, and crust type affect the number of eruptions, and
-also suggests that these factor also affect the volcano type. If we had
-more time I think it would be an interesting extension of our project to
-investigate the relationship between the factors which affect the number
-of volcano eruptions. The majority of this plot if red which indicates
-majority of volcanoes with high number of eruptions in our data set are
-stratovolcanoes. The variation in number of eruptions as primary volcano
-types varies, may lead us to believe that primary volcano type is a
-factor which affects the number of eruptions.
+tectonic plate setting, and crust type affect the number of eruptions,
+and also suggests that these factor also affect the volcano type. If we
+had more time I think it would be an interesting extension of our
+project to investigate the relationship between the factors which affect
+the number of volcano eruptions. The majority of this plot if red which
+indicates majority of volcanoes with high number of eruptions in our
+data set are stratovolcanoes. The variation in number of eruptions as
+primary volcano types varies, may lead us to believe that primary
+volcano type is a factor which affects the number of eruptions.
 
 # Number of Eruptions by Volcano Type
 
