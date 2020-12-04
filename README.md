@@ -70,6 +70,18 @@ volcanoes are on land, whilst most ocean volcanos appear to be rift
 volcanos, a scientific study of why this is the case would be really
 interesting if future research occurred.
 
+**Emma **
+
+In conclusion we believe the factors of: -Location of volcano (position
+on tectonic plate) -Tectonic Plate Setting -Tectonic Plate Type -Crust
+Type -Primary Volcano Type have an influence on the number of volcano
+eruptions. Through our investigation we have come across many new
+potential relationships between these factors, which should further
+research be conducted with perhaps more expert knowledge on the subject
+could be really beneficial to looking at which areas that are and could
+potentially become more dangerous places for living and biodiversity
+development.
+
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
@@ -153,17 +165,6 @@ Mock, T 2020, “Volcano Eruptions”, electronic dataset, Global Volcanism
 Program/Smithsonian Institution, viewed 4 December 2020,
 <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
 
-## References
-
-  - <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
-
-  - <https://rstudio.github.io/leaflet/markers.html>
-
-  - <https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/>
-
-  - <https://www.britannica.com/science/volcano>
-
-  - 
 ## Number of Eruptions by Country and Volcano Type
 
 Plot shows the frequency of eruptions in each country, grouped by
@@ -216,3 +217,15 @@ of Number of eruptions by volcano type and the bar plot for number of
 volcanoes by volcano type, that the plot take a similar shape, which may
 be an indicator that the number of eruptions of each volcano type is
 proportional to the number of volcanoes of that type.
+
+## References
+
+  - <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
+
+  - <https://rstudio.github.io/leaflet/markers.html>
+
+  - <https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/>
+
+  - <https://www.britannica.com/science/volcano>
+
+  -
