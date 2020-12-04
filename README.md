@@ -1,18 +1,133 @@
-Factors affecting the frequency of Volcanic eruptions
+Factors affecting frequency of Volcanic eruptions
 ================
 x404-pagenotfound
 
 ## Summary
 
-We chose to research what factors affect the frequency of volcanic eruptions.
+We chose to research what factors affect the frequency of volcanic
+eruptions.
 
-The data we are analyzing comes from the tidytuesdy package, and was collected by the Smithsonian's Global Volcanism Program. To explore the factors affecting volcanic eruptions, we used 2 data frames, one of which listed every volcano on the planet, giving its position, name, number...etc, while the other data set listed every recorded volcanic eruption. Both dataframes have far too many variables to explore, so we decided to focus on factors like position, country, crust type, and tectonic setting.
+The data we are analyzing comes from the tidytuesdy package, and was
+collected by the Smithsonian’s Global Volcanism Program. To explore the
+factors affecting volcanic eruptions, we used 2 data frames, one of
+which listed every volcano on the planet, giving its position, name,
+number…etc, while the other data set listed every recorded volcanic
+eruption. Both dataframes have far too many variables to explore, so we
+decided to focus on factors like position, country, crust type, and
+tectonic setting.
 
-Now, the easiest visualization to spot trends by location is obviously a world map, so we will start there. To get an idea of which countries have had the most volcanic eruptions, we created a choropleth map which shows number of eruptions by country. Now, this is helpful, but it is impossible to see any trend, because we can't see groups of eruptions within the countries. Also, as you can see from the scale, this map only gives a rough idea of where the most eruptions happen.
+Now, the easiest visualization to spot trends by location is obviously a
+world map, so we will start there. To get an idea of which countries
+have had the most volcanic eruptions, we created a choropleth map which
+shows number of eruptions by country. Now, this is helpful, but it is
+impossible to see any trend, because we can’t see groups of eruptions
+within the countries. Also, as you can see from the scale, this map only
+gives a rough idea of where the most eruptions happen.
 
-So to solve this, we create a clustered world map. Now the patterns a becoming a little more apparent. For example, we can now see that most of the large clusters of eruptions are circled around the pacific ocean. Our hypothesis as to why these trends exist had to do with tectonic plates.
+So to solve this, we create a clustered world map. Now the patterns a
+becoming a little more apparent. For example, we can now see that most
+of the large clusters of eruptions are circled around the pacific ocean.
+Our hypothesis as to why these trends exist had to do with tectonic
+plates.
 
-So we layered a map of the tectonic borders on to the points, and as you can see, there is an clear pattern. Most of the eruptions took place along a tectonic border, which isn't surprising because volcanoes are formed by the clashing of two plates. The circle of volcanoes around the pacific that we saw earlier is a result of the pacific plate, and is actually called the Pacific Ring of Fire. So just by looking at the maps, we can see that location has a big effect on the count of eruptions in a given area.
+So we layered a map of the tectonic borders on to the points, and as you
+can see, there is an clear pattern. Most of the eruptions took place
+along a tectonic border, which isn’t surprising because volcanoes are
+formed by the clashing of two plates. The circle of volcanoes around the
+pacific that we saw earlier is a result of the pacific plate, and is
+actually called the Pacific Ring of Fire. So just by looking at the
+maps, we can see that location has a big effect on the count of
+eruptions in a given area.
+
+We then wanted to investigate whether the type of crust and tectonic
+setting influenced the number of eruptions. To clarify these variable’s
+meaning; the earth’s crust is split into tectonic plates which lie on
+top of the mantle. The type of plate is given as the crust variable and
+is either: -Continental (thick land plates) -Oceanic (thinner but
+heavier sea plates) -Intermediate -And unknown plates. The tectonic
+setting is the movement of the plates and mantle that causes the volcano
+to form. It is given as the variables: -Subduction zone (an oceanic
+plate moves beneath a continental plate) -Rift Zone (two plates move
+apart) -Intraplate (a hotter area causes increased magma at the surface)
+
+We investigated these as when comparing the maps of distribution it was
+clear that certain areas of the map had higher frequencies of distinct
+tectonic settings and crust types in the same areas.
+
+The initial plan was to fit linear models for frequency by crust and
+tectonic setting separately. However when evaluating both models, the r
+squared value was very low and the residuals were in distinct clusters
+by variable category, hence we concluded the linear models weren’t
+suitable for the data in hand. We decided our research question could be
+answered by visualization and comparisons.
+
+When reviewing the number of eruptions on each crust type it is clear
+that continental crust is the crust type with the most eruptions.
+Comparing the number of eruptions for each tectonic setting, the
+subduction zone has the most eruptions. When referring back to the
+distribution maps this connection is shown as all of the subduction
+volcanoes are on land, whilst most ocean volcanos appear to be rift
+volcanos, a scientific study of why this is the case would be really
+interesting if future research occurred.
+
+    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+
+    ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+    ## ✓ tibble  3.0.4     ✓ dplyr   1.0.2
+    ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+    ## ✓ readr   1.3.1     ✓ forcats 0.5.0
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_character(),
+    ##   volcano_number = col_double(),
+    ##   latitude = col_double(),
+    ##   longitude = col_double(),
+    ##   elevation = col_double(),
+    ##   population_within_5_km = col_double(),
+    ##   population_within_10_km = col_double(),
+    ##   population_within_30_km = col_double(),
+    ##   population_within_100_km = col_double()
+    ## )
+
+    ## See spec(...) for full column specifications.
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   volcano_number = col_double(),
+    ##   volcano_name = col_character(),
+    ##   eruption_number = col_double(),
+    ##   eruption_category = col_character(),
+    ##   area_of_activity = col_character(),
+    ##   vei = col_double(),
+    ##   start_year = col_double(),
+    ##   start_month = col_double(),
+    ##   start_day = col_double(),
+    ##   evidence_method_dating = col_character(),
+    ##   end_year = col_double(),
+    ##   end_month = col_double(),
+    ##   end_day = col_double(),
+    ##   latitude = col_double(),
+    ##   longitude = col_double()
+    ## )
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   volcano_number = col_double(),
+    ##   volcano_name = col_character(),
+    ##   eruption_number = col_double(),
+    ##   eruption_start_year = col_double(),
+    ##   event_number = col_double(),
+    ##   event_type = col_character(),
+    ##   event_remarks = col_character(),
+    ##   event_date_year = col_double(),
+    ##   event_date_month = col_double(),
+    ##   event_date_day = col_double()
+    ## )
 
 ## Presentation
 
@@ -20,74 +135,21 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Mock, T 2020, "Volcano Eruptions", electronic dataset, Global Volcanism Program/Smithsonian Institution, viewed 4 December 2020, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
-
+Mock, T 2020, “Volcano Eruptions”, electronic dataset, Global Volcanism
+Program/Smithsonian Institution, viewed 4 December 2020,
+<https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
 
 ## References
 
-- https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md
-- https://rstudio.github.io/leaflet/markers.html
-- https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/
-- https://www.britannica.com/science/volcano
-- 
+  - <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
 
-## Modelling frequency by crust type and frequency by tectonic setting
+  - <https://rstudio.github.io/leaflet/markers.html>
 
-One of the initial goals was to fit a linear model to frequency by crust
-type and tectonic setting separately. When carrying this out the values
-given by the output were plausible when viewing the graphs and a small
-amount of prior knowledge however the evalutations showed that linear
-models were not appropriate. The adjusted r squared values for both sets
-of data were very small showing the models were only accurate for a very
-small proportion of the data, in addition to this both the residuals
-plots showed residuals in distinct clusters that, when coloured by crust
-or tectonic settings, showed they were grouped by the categories of
-variable. At this point we considered exploring other models however we
-decided that the use bar charts and other visualizations to explain the
-trends in frequency, tectonic settings and crust types rather than
-trying to fit a model that may not cover such a wide range of data
-efficiently.
+  - <https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/>
 
-\#\#Number of Volcanos by Crust type. The bar plot shows the number of
-eruptions that have been recorded on each separate crust type. The
-unknown volcanos where filtered out of the data to try to get a clearer
-idea of any relationship displayed. Its clear from the graph that the
-majority of eruptions occur on continental plates, being over 4 times
-greater than those recorded on oceanic plates and about 10 times greater
-than those recorded on intermediate plates. The ambiguity of an
-intermediate plate may explain the small number of observations there.
-It is also possible that the lower number of eruptions on Oceanic plates
-is down to more remote locations of the volcanos. The data set goes back
-to very early years so it’s plausible that eruptions recorded at these
-times would only have been those where a town or village was impacted by
-the volcano directly. Eruptions in the middle of the ocean likely went
-unrecorded as there was no way of knowing they were occuring.
+  - <https://www.britannica.com/science/volcano>
 
-The histogram for number of eruptions by start year doesn’t confirm this
-theory. Whilst the number of volcanoes recorded in the data increases by
-millenium (most significantly in the most recent), the relative
-proportion of continental to oceanic crust stays approximately the same.
-This confirms the initial graphs projection that, at least in the
-dataset, there are significantly more volcanic eruptions on continental
-plates than oceanic plates.
-
-## Number of Eruptions by Tectonic Settings
-
-From the plot of frequency of eruptions for different tectonic settings
-shows that the majority of eruptions occur as a result of a subduction
-zone, about 4 times as many of those that occur as a result of a rift
-zone and about 5 times as many of those that occur as a result of an
-intraplate. When comparing the maps for eruptions by tectonic setting to
-crust type we can see that for the most part, volcanos formed by a
-subduction zone are on continental crust referrring back to the earlier
-definition this has already been explained. Intraplate formation appears
-more randomly distributed however by definition they don’t require the
-presence of a plate boundary to form, making them more random in nature.
-Most volcanos on oceanic crust appear to be formed by a rift zone
-however there are also continental rift zone volcanos which explains the
-greater difference in continental and oceanic crust eruptions than in
-subduction zone and rift zone eruptions.
-
+  - 
 ## Number of Eruptions by Country and Volcano Type
 
 Plot shows the frequency of eruptions in each country, grouped by

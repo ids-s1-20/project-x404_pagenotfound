@@ -38,7 +38,7 @@ volcano_tecs <- volcano%>%
   #seperate the tec setting from the crust 
   separate(tectonic_settings, c("techtonic_setting", "crust"),
                     sep = "([/])")
-  
+
 ```
 
 ```{r eruption-frequency}
@@ -53,7 +53,6 @@ eruption_tecs_fqncy <- eruption_tecs%>%
   #ideally remove whitespace for easier use but leave for later
   filter(crust != " Crustal thickness unknown")
   
-
   
 ```
 

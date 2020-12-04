@@ -16,21 +16,22 @@ So to solve this, we create a clustered world map. Now the patterns a becoming a
 
 So we layered a map of the tectonic borders on to the points, and as you can see, there is an clear pattern. Most of the eruptions took place along a tectonic border, which isn't surprising because volcanoes are formed by the clashing of two plates. The circle of volcanoes around the pacific that we saw earlier is a result of the pacific plate, and is actually called the Pacific Ring of Fire. So just by looking at the maps, we can see that location has a big effect on the count of eruptions in a given area.
 
-We then wanted to investigate whether the type of crust and tectonic setting influenced the number of eruptions. To clarify these variables; the earth’s crust is split into tectonic plates which lie on top of the mantle. 
+We then wanted to investigate whether the type of crust and tectonic setting influenced the number of eruptions. To clarify these variable's meaning; the earth’s crust is split into tectonic plates which lie on top of the mantle. 
 The type of plate is given as the crust variable and is either: 
 -Continental (thick land plates)
 -Oceanic (thinner but heavier sea plates)
 -Intermediate
 -And unknown plates. 
-The tectonic setting is the movement of the plates and mantle that causes the volcano to form. The tectonic settings are given as the variables:
+The tectonic setting is the movement of the plates and mantle that causes the volcano to form. It is given as the variables:
 -Subduction zone (an oceanic plate moves beneath a continental plate)
 -Rift Zone (two plates move apart)
 -Intraplate (a hotter area causes increased magma at the surface)
+
 We investigated these as when comparing the maps of distribution it was clear that certain areas of the map had higher frequencies of distinct tectonic settings and crust types in the same areas.
 
 The initial plan was to fit linear models for frequency by crust and tectonic setting separately. However when evaluating both models, the r squared value was very low and the residuals were in distinct clusters by variable category, hence we concluded the linear models weren’t suitable for the data in hand. We decided our research question could be answered by visualization and comparisons.
 
-When reviewing the number of eruptions on each crust type it is clear that continental crust has more eruptions than oceanic or intermediate crust. Then looking at the number of eruptions for each tectonic setting the subduction zone has much more eruptions than rift zone or intraplate volcanoes. When referring back to the distribution maps this connection is shown as all of the subduction volcanos are on land, whilst most ocean volcanos appear to be rift volcanos, a scientific study of why this is the case would be really interesting if future research occurred.
+When reviewing the number of eruptions on each crust type it is clear that continental crust is the crust type with the most eruptions. Comparing the number of eruptions for each tectonic setting, the subduction zone has the most eruptions. When referring back to the distribution maps this connection is shown as all of the subduction volcanoes are on land, whilst most ocean volcanos appear to be rift volcanos, a scientific study of why this is the case would be really interesting if future research occurred.
 
 ```{r load-data, echo = FALSE}
 library(tidyverse)
