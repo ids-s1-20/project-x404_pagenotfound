@@ -244,7 +244,7 @@ leaflet(eruption_tecs) %>%
     stroke = FALSE, 
     fillOpacity = 0.4
   ) %>%
-  setView(3, -5, zoom = 2.5) #set starting view and zoom
+  setView(3, -5, zoom = 1.5) #set starting view and zoom
 ```
 ---
 
@@ -270,7 +270,7 @@ leaflet(eruption_tecs) %>%
     stroke = FALSE, 
     fillOpacity = 0.4
   ) %>%
-  setView(3, -5, zoom = 2.5) #set starting view and zoom
+  setView(3, -5, zoom = 1.5) #set starting view and zoom
 ```
 ---
 
