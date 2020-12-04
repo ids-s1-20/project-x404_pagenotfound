@@ -78,9 +78,7 @@ Type -Primary Volcano Type have an influence on the number of volcano
 eruptions. Through our investigation we have come across many new
 potential relationships between these factors, which should further
 research be conducted with perhaps more expert knowledge on the subject
-could be really beneficial to looking at which areas that are and could
-potentially become more dangerous places for living and biodiversity
-development.
+could be interesting.
 
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 
