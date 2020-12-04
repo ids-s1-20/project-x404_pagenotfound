@@ -211,8 +211,7 @@ eruption_tecs<- left_join(volcano_tecs, eruptions,
 eruption_tecs_fqncy <- eruption_tecs%>%
   count(volcano_number, volcano_name, techtonic_setting, crust) %>% 
   mutate(frequency = as.factor(n))%>%
-  #str_trim("crust", side = "left")%>%
-  #ideally remove whitespace for easier use but leave for later
+  #to try to fit best model remove unknown crusts
   filter(crust != " Crustal thickness unknown")
   
 
@@ -220,6 +219,7 @@ eruption_tecs_fqncy <- eruption_tecs%>%
 ```
 
 ```{r tec-map, echo = FALSE}
+#set colours for each tectonic setting
 tec_pal<- colorFactor(
   palette = c("#a50026", "#313695", "#4d9221"),
   domain = eruption_tecs$techtonic_setting
@@ -234,6 +234,7 @@ leaflet(eruption_tecs) %>%
   addCircleMarkers(
     ~longitude, ~latitude,
     radius = 3,
+    #add colour argument dependent on techtonic_setting
     color = ~tec_pal(techtonic_setting),
     stroke = FALSE, 
     fillOpacity = 0.4
@@ -245,6 +246,7 @@ leaflet(eruption_tecs) %>%
 # Map of Crust type
 
 ```{r crust-map, echo=FALSE}
+#set colours for each crust type
 crust_pal<- colorFactor(
   palette = c("#d73027", "#762a83", "#fee090", "#4575b4"),
   domain = eruption_tecs$crust
@@ -260,6 +262,7 @@ leaflet(eruption_tecs) %>%
   addCircleMarkers(
     ~longitude, ~latitude,
     radius = 3,
+    #add colour arguement depenant on crust
     color = ~crust_pal(crust),
     stroke = FALSE, 
     fillOpacity = 0.4
