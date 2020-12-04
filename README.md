@@ -70,6 +70,18 @@ volcanoes are on land, whilst most ocean volcanos appear to be rift
 volcanos, a scientific study of why this is the case would be really
 interesting if future research occurred.
 
+**Emma **
+
+In conclusion we believe the factors of: -Location of volcano (position
+on tectonic plate) -Tectonic Plate Setting -Tectonic Plate Type -Crust
+Type -Primary Volcano Type have an influence on the number of volcano
+eruptions. Through our investigation we have come across many new
+potential relationships between these factors, which should further
+research be conducted with perhaps more expert knowledge on the subject
+could be really beneficial to looking at which areas are and could
+potentially become more dangerous places for living and biodiversity
+development.
+
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
