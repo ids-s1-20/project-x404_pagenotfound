@@ -67,13 +67,6 @@ Our presentation can be found [here](presentation/presentation.html).
 
 Mock, T 2020, "Volcano Eruptions", electronic dataset, Global Volcanism Program/Smithsonian Institution, viewed 4 December 2020, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
 
-## Modelling frequency by crust type and frequency by tectonic setting
-One of the initial goals was to fit a linear model to frequency by crust type and tectonic setting separately. When carrying this out the values given by the output were plausible when viewing the graphs and a small amount of prior knowledge however the evalutations showed that linear models were not appropriate. The adjusted r squared values for both sets of data were very small showing the models were only accurate for a very small proportion of the data, in addition to this both the residuals plots showed residuals in distinct clusters that, when coloured by crust or tectonic settings, showed they were grouped by the categories of variable.
-At this point we considered exploring other models however we decided that the use bar charts and other visualizations to explain the trends in frequency, tectonic settings and crust types rather than trying to fit a model that may not cover such a wide range of data efficiently.
-
-##Number of Volcanos by Crust type.
-The bar plot shows the number of eruptions that have been recorded on each separate crust type. The unknown volcanos where filtered out of the data to try to get a clearer idea of any relationship displayed. Its clear from the graph that the majority of eruptions occur on continental plates, being over 4 times greater than those recorded on oceanic plates and about 10 times greater than those recorded on intermediate plates. 
-The ambiguity of an intermediate plate may explain the small number of observations there. It is also possible that the lower number of eruptions on Oceanic plates is down to more remote locations of the volcanoes. The data set goes back to very early years so it's plausible that eruptions recorded at these times would only have been those where a town or village was impacted by the volcano directly. Eruptions in the middle of the ocean likely went unrecorded as there was no way of knowing they were occurring.
 
 
 ## Number of Eruptions by Country and Volcano Type
