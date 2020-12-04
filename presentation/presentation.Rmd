@@ -24,10 +24,13 @@ library(knitr)
 library(broom)
 library(janitor)
 library(glue)
+#for choropleth map
 library(choroplethr)
 library(choroplethrMaps)
+#for leaflet interactive maps, and layering maps
 library(leaflet)
-library(xaringan)
+library(rgdal)
+
 ```
 
 ```{r setup, include=FALSE}
@@ -38,14 +41,14 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```{r load-data, include=FALSE}
 # Load your data here
 setwd("/cloud/project/proposal")
-volcano <- read_csv("../data/volcano.csv")
-eruptions <- read_csv("../data/eruptions.csv")
+volcano <- read_csv("../data/volcano.csv") #contains info on every volcano
+eruptions <- read_csv("../data/eruptions.csv") #contains info about every eruptions
 events <- read_csv("../data/events.csv")
 ```
 
 ```{r data-for-map, include=FALSE}
 #Join eruptions and volcano to match each eruption to its corresponding volcano
-volcanic_eruption <- left_join(volcano, eruptions, by="volcano_number")
+volcanic_eruption <- left_join(volcano, eruptions, by="volcano_number") #match each eruption with its corresponding volcano in the volcano df
 #load df with list of countries
 data("country.regions")
 #create CountVolc which stores number of eruptions for each country
@@ -102,7 +105,7 @@ labs(title = "Number of Volcanic Eruptions by Country")
 
 
 
-#find countries that arent included
+#find countries that aren't included
 MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regions$region]
 ```
 
@@ -110,30 +113,48 @@ MissingCountries = CountVolcUni$country[!CountVolcUni$country %in% country.regio
 ---
 
 ```{r, echo=FALSE}
+#clustered leaflet interactive map
 set.seed(1)
-ran_rows <- sample(nrow(volcanic_eruption), 1000)
+ran_rows <- sample(nrow(volcanic_eruption), 1000) #random sample for testing
 leaflet(data = volcanic_eruption) %>% 
   addTiles() %>%
-  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions())
+  addMarkers(~longitude.x, ~latitude.x, popup = ~as.character(volcano_name.x), label = ~as.character(volcano_name.x), clusterOptions = markerClusterOptions()) %>%
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 
 ---
+```{r, include=FALSE}
+my_spdf <- readOGR("/cloud/project/presentation/presentation_files/tectonicplates-master/PB2002_plates.shp") #tectonic plate shape data (.shp)
+```
 
 ```{r, echo=FALSE}
-leaflet(volcanic_eruption) %>% 
+beatCol <- colorFactor(palette = 'RdYlGn', factor(volcanic_eruption$vei)) #random color palette for plotting by magnitude (vei)
+
+leaflet(volcanic_eruption) %>%
+  addTiles() %>% # get map tiles from google maps
+  addCircleMarkers( #add points
+    ~longitude.x, ~latitude.x,
+    radius = ~sqrt(volcanic_eruption$vei*5), #radius of points depends on eruption magnitude
+    color = "red",#~beatCol(factor(volcanic_eruption$vei)) will be used if we want to color by magnitude
+    stroke = FALSE, fillOpacity = 0.4
+  ) %>%
+  addPolylines(data = my_spdf, weight = 2) %>% #add tectonic boundaries
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
+```
+
+```{r Proof-that-magnitude-isnt-correlated-to-position, include=FALSE}
+leaflet(subset(volcanic_eruption, vei ==2)) %>% #vei == 1,2,3,4,5,6,7 to show a map for each magnitude
   addTiles() %>%
   addCircleMarkers(
     ~longitude.x, ~latitude.x,
     radius = 3,
-    color = "red",
+    color = "red",#~beatCol(factor(volcanic_eruption$vei)),
     stroke = FALSE, fillOpacity = 0.4
-  )
+  ) %>% 
+  addPolylines(data = my_spdf, weight = 2) %>%
+  setView(-1.479538, 53.380851, zoom = 3)
 ```
 
-![tectonicmap](images/tectonicplatesmap.png)
---- 
-
-# Map eruptions as data points compared with tectonic plates
 
 ---
 
@@ -222,7 +243,8 @@ leaflet(eruption_tecs) %>%
     color = ~tec_pal(techtonic_setting),
     stroke = FALSE, 
     fillOpacity = 0.4
-  )
+  ) %>%
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 ---
 
@@ -247,7 +269,8 @@ leaflet(eruption_tecs) %>%
     color = ~crust_pal(crust),
     stroke = FALSE, 
     fillOpacity = 0.4
-  )
+  ) %>%
+  setView(3, -5, zoom = 2.5) #set starting view and zoom
 ```
 ---
 

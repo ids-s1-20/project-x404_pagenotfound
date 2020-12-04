@@ -6,18 +6,15 @@ output: github_document
 
 ## Summary
 
-Write-up of your project and findings go here. 
-Think of this as the text of your presentation. 
-The length should be roughly 5 minutes when read out loud.
-Although pacing varies, a 5-minute speech is roughly 750 words. 
-To use the word count addin, select the text you want to count the words of (probably this is the 
-Summary section of this document, go to Addins, and select the `Word count` addin).
-This addin counts words using two different algorithms, but the results should be similar and as long as you're in the ballpark of 750 words, you're good! 
-The addin will ignore code chunks and only count the words in prose.
+We chose to research what factors affect the frequency of volcanic eruptions.
 
-You can also load your data here and present any analysis results / plots, but I strongly urge you to keep that to a minimum (maybe only the most important graphic, if you have one you can choose). 
-And make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself.
-Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
+The data we are analyzing comes from the tidytuesdy package, and was collected by the Smithsonian's Global Volcanism
+Program. To explore the factors affecting volcanic eruptions, we used 2 data frames, one of which listed every
+volcano on the planet, giving its position, name, number...etc, while the other data set listed every recorded
+volcanic eruption, and included name, number, year...etc. Both dataframes have far too many variables to explore,
+so we decided to focus on factors like position, country, crust type, and tectonic setting.
+
+
 
 ```{r load-data, echo = FALSE}
 library(tidyverse)
@@ -33,15 +30,15 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Include a citation for your data here. 
-See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
-If you got your data off the web, make sure to note the retrieval date.
-
-https://www.britannica.com/science/volcano <- Volcano types and explanations
+Mock, T 2020, "Volcano Eruptions", electronic dataset, Global Volcanism Program/Smithsonian Institution, viewed 4 December 2020, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
 
 ## References
 
-List any references here. You should, at a minimum, list your data source.
+- https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md
+- https://rstudio.github.io/leaflet/markers.html
+- https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/
+- https://www.britannica.com/science/volcano
+- 
 
 ## Modelling frequency by crust type and frequency by tectonic setting
 One of the initial goals was to fit a linear model to frequency by crust type and tectonic setting separately. When carrying this out the values given by the output were plausible when viewing the graphs and a small amount of prior knowledge however the evalutations showed that linear models were not appropriate. The adjusted r squared values for both sets of data were very small showing the models were only accurate for a very small proportion of the data, in addition to this both the residuals plots showed residuals in distinct clusters that, when coloured by crust or tectonic settings, showed they were grouped by the categories of variable.
