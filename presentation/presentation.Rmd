@@ -1,6 +1,6 @@
 ---
 title: "Factors affecting frequency of Volcanic eruptions"
-subtitle: "Presentation subtitle (if any)"
+subtitle: "And Visualisations of their Global Distrubution"
 author: "x404-pagenotfound <br> Emma, Bridget, Sachin"
 institute: "University of Edinburgh"
 date: "4 December 2020"
