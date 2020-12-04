@@ -66,11 +66,62 @@ that continental crust is the crust type with the most eruptions.
 Comparing the number of eruptions for each tectonic setting, the
 subduction zone has the most eruptions. When referring back to the
 distribution maps this connection is shown as all of the subduction
-volcanoes are on land, whilst most ocean volcanos appear to be rift
-volcanos, a scientific study of why this is the case would be really
+volcanoes are on land, whilst most ocean volcanoes appear to be rift
+volcanoes, a scientific study of why this is the case would be really
 interesting if future research occurred.
 
-**Emma **
+## Number of Eruptions by Country and Volcano Type
+
+Plot shows the frequency of eruptions in each country, grouped by
+volcano type. We choose to only show the top 25 groups of country and
+volcano types to avoid overwhelming so this is only a sample of the
+data. It can be clearly seen that Japan has the highest number of
+eruptions, mainly from strato, caldera and complex volcanoes, closely
+followed by Indonesia, and the composition of the eruptions by volcano
+type is similar.The US also has a high number of volcanic eruptions,
+with eruptions almost evenly split between strato and shield volcanoes.
+If we look at the countries of South America; Mexico,Equador,Costa Rica
+and Chile, they all have a relatively similar number of eruptions,
+solely composed of strato volcanoes. This backs up our conclusion that
+tectonic plate type, and crust type affect the number of eruptions, and
+also suggests that these factor also affect the volcano type. If we had
+more time I think it would be an interesting extension of our project to
+investigate the relationship between the factors which affect the number
+of volcano eruptions. The majority of this plot if red which indicates
+majority of volcanoes with high number of eruptions in our data set are
+stratovolcanoes. The variation in number of eruptions as primary volcano
+types varies, may lead us to believe that primary volcano type is a
+factor which affects the number of eruptions.
+
+# Number of Eruptions by Volcano Type
+
+This can be seen more clearly in this bar plot which shows the number of
+eruptions grouped by primary volcano type, in particular it shows 9
+primary volcano types with the top 9 number of eruptions. This very
+clearly shows that stratovolcanoes are responsible for the greatest
+number of eruptions, with nearly 6000 eruptions in the dataset being
+eruptions of stratovolcanoes. This is significantly more eruptions than
+shield and Caldera volcanoes, which have the second and third highest
+number of eruptions, with around 1000 eruptions recorded in the dataset.
+We could conclude that volcano type is a factor which affects the number
+of eruptions, but I believe to support this conclusion it is important
+to take into the consideration the number of each volcano type in the
+dataset.
+
+## Number of Volcanoes by Volcano Type
+
+This bar plot shows the number of volcanoes grouped by primary volcano
+type. It shows there are 23 different primary volcano types recorded in
+the dataset. Stratovolcanoes are the most abundant volcano types,
+therefore it makes sense that they cause the most eruptions, however
+there are approximately 450 stratovolcanoes, which are responsible for
+6000 eruptions in the dataset. Therefore Stratovolcanoes must erupt
+several times within there lifetime, approximately 13 times each if we
+were to take a raw average. You can also see if we compare the bar plot
+of Number of eruptions by volcano type and the bar plot for number of
+volcanoes by volcano type, that the plot take a similar shape, which may
+be an indicator that the number of eruptions of each volcano type is
+proportional to the number of volcanoes of that type.
 
 In conclusion we believe the factors of: -Location of volcano (position
 on tectonic plate) -Tectonic Plate Setting -Tectonic Plate Type -Crust
@@ -162,59 +213,6 @@ Our presentation can be found [here](presentation/presentation.html).
 Mock, T 2020, “Volcano Eruptions”, electronic dataset, Global Volcanism
 Program/Smithsonian Institution, viewed 4 December 2020,
 <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
-
-## Number of Eruptions by Country and Volcano Type
-
-Plot shows the frequency of eruptions in each country, grouped by
-volcano type. We choose to only show the top 25 groups of country and
-volcano types to avoid overwhelming so this is only a sample of the
-data. It can be clearly seen that Japan has the highest number of
-eruptions, mainly from strato, caldera and complex volcanoes, closely
-followed by Indonesia, and the composition of the eruptions by volcano
-type is similar.The US also has a high number of volcanic eruptions,
-with eruptions almost evenly split between strato and shield volcanoes.
-If we look at the countries of South America; Mexico,Equador,Costa Rica
-and Chile, they all have a relatively similar number of eruptions,
-solely composed of strato volcanoes. This backs up our conclusion that
-tectonic plate type, and crust type affect the number of eruptions, and
-also suggests that these factor also affect the volcano type. If we had
-more time I think it would be an interesting extension of our project to
-investigate the relationship between the factors which affect the number
-of volcano eruptions. The majority of this plot if red which indicates
-majority of volcanoes with high number of eruptions in our data set are
-stratovolcanoes. The variation in number of eruptions as primary volcano
-types varies, may lead us to believe that primary volcano type is a
-factor which affects the number of eruptions.
-
-# Number of Eruptions by Volcano Type
-
-This can be seen more clearly in this bar plot which shows the number of
-eruptions grouped by primary volcano type, in particular it shows 9
-primary volcano types with the top 9 number of eruptions. This very
-clearly shows that stratovolcanoes are responsible for the greatest
-number of eruptions, with nearly 6000 eruptions in the dataset being
-eruptions of stratovolcanoes. This is significantly more eruptions than
-shield and Caldera volcanoes, which have the second and third highest
-number of eruptions, with around 1000 eruptions recorded in the dataset.
-We could conclude that volcano type is a factor which affects the number
-of eruptions, but I believe to support this conclusion it is important
-to take into the consideration the number of each volcano type in the
-dataset.
-
-## Number of Volcanoes by Volcano Type
-
-This bar plot shows the number of volcanoes grouped by primary volcano
-type. It shows there are 23 different primary volcano types recorded in
-the dataset. Stratovolcanoes are the most abundant volcano types,
-therefore it makes sense that they cause the most eruptions, however
-there are approximately 450 stratovolcanoes, which are responsible for
-6000 eruptions in the dataset. Therefore Stratovolcanoes must erupt
-several times within there lifetime, approximately 13 times each if we
-were to take a raw average. You can also see if we compare the bar plot
-of Number of eruptions by volcano type and the bar plot for number of
-volcanoes by volcano type, that the plot take a similar shape, which may
-be an indicator that the number of eruptions of each volcano type is
-proportional to the number of volcanoes of that type.
 
 ## References
 
