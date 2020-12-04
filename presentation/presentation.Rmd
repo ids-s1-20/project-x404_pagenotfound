@@ -189,12 +189,6 @@ Two plates move away from each other forming a gap for mantle to move through fo
 
 *Intraplate:* 
 A much hotter area of the mantle causes magma to rise to the surface to form a volcano.
-
-```{r tec-settings, echo = FALSE, out.width = "40%", fig.cap = "Image credit: Oregon Department of Geology and Mineral Industries- Plate Tectonics & Hot Spots"} 
-
-include_graphics("https://www.oregongeology.org/pubs/ims/ims-028/images/sesqui_subdxn.jpg") 
-
-``` 
 ---
 
 # Map eruptions by tectonic plate type

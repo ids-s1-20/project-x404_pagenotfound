@@ -306,6 +306,12 @@ This is when two plates are moving away from each other forming a gap in the cru
 These form when there is a much hotter area of the mantle, causing the magma to rise to the surface where it is then pushed through the crust to form a volcano on the surface.
 
  fig.align = "center",
+ 
+```{r tec-settings, echo = FALSE, out.width = "40%", fig.cap = "Image credit: Oregon Department of Geology and Mineral Industries- Plate Tectonics & Hot Spots"} 
+
+include_graphics("https://www.oregongeology.org/pubs/ims/ims-028/images/sesqui_subdxn.jpg") 
+
+``` 
 
 
 
