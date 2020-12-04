@@ -81,6 +81,20 @@ interesting if future research occurred.
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
+    ## 
+    ## Attaching package: 'janitor'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     chisq.test, fisher.test
+
+    ## 
+    ## Attaching package: 'glue'
+
+    ## The following object is masked from 'package:dplyr':
+    ## 
+    ##     collapse
+
     ## Parsed with column specification:
     ## cols(
     ##   .default = col_character(),

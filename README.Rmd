@@ -33,9 +33,15 @@ The initial plan was to fit linear models for frequency by crust and tectonic se
 
 When reviewing the number of eruptions on each crust type it is clear that continental crust is the crust type with the most eruptions. Comparing the number of eruptions for each tectonic setting, the subduction zone has the most eruptions. When referring back to the distribution maps this connection is shown as all of the subduction volcanoes are on land, whilst most ocean volcanos appear to be rift volcanos, a scientific study of why this is the case would be really interesting if future research occurred.
 
-```{r load-data, echo = FALSE}
+```{r packages, echo=FALSE}
 library(tidyverse)
-setwd("/cloud/project/proposal")
+library(broom)
+library(janitor)
+library(glue)
+```
+
+```{r load-data, echo = FALSE}
+#setwd("/cloud/project/proposal")
 volcano <- read_csv("/cloud/project/data/volcano.csv")
 eruptions <- read_csv("/cloud/project/data/eruptions.csv")
 events <- read_csv("/cloud/project/data/events.csv")
