@@ -217,10 +217,6 @@ Program/Smithsonian Institution, viewed 4 December 2020,
 ## References
 
   - <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md>
-
   - <https://rstudio.github.io/leaflet/markers.html>
-
   - <https://arilamstein.com/blog/2016/03/21/mapping-election-results-r-choroplethr/>
-
   - <https://www.britannica.com/science/volcano>
-
