@@ -191,7 +191,7 @@ A much hotter area of the mantle causes magma to rise to the surface to form a v
 ---
 
 # Map eruptions by tectonic plate type
-
+.pull-left[
 ```{r seperate-techtonics, echo=FALSE}
 volcano_tecs <- volcano%>%
   #filter out Vitim Volcanic Field volcano as tec settings are unknown
@@ -240,10 +240,20 @@ leaflet(eruption_tecs) %>%
   ) %>%
   setView(3, -5, zoom = 1.5) #set starting view and zoom
 ```
+]
+.pull-right[
+#Tectonic Setting
+red= Intraplate
+
+blue= Rift Zone
+
+green= Subduction Zone
+]
+
 ---
 
 # Map of Crust type
-
+.pull-left[
 ```{r crust-map, echo=FALSE}
 #set colours for each crust type
 crust_pal<- colorFactor(
@@ -268,6 +278,18 @@ leaflet(eruption_tecs) %>%
   ) %>%
   setView(3, -5, zoom = 1.5) #set starting view and zoom
 ```
+]
+.pull-right[
+
+#Crust types
+red=continental
+
+yellow=intermediate
+
+blue=oceanic
+
+purple=unknown
+]
 ---
 
 # Model frequency by crust type
