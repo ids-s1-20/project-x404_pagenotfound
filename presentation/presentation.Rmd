@@ -159,7 +159,7 @@ leaflet(subset(volcanic_eruption, vei ==2)) %>% #vei == 1,2,3,4,5,6,7 to show a 
 ---
 
 #What are the variables crust and tectonic setting?
-Volcano formation concerns the top two layers of the earth- the crust(composed of sections known as tectonic plates, this is the surface) and the mantle(the second outermost layer formed of partially molten rock (magma) which moves very slowly). This causes the plates to move (only about a couple of cm per year) which, depending on the direction of movement can cause earthquakes and volcano formation. 
+Volcano formation concerns the top two layers of the earth- the crust(composed of sections known as tectonic plates, this is the surface) and the mantle(the second outermost layer formed of partially molten rock (magma) which moves very slowly).
 
 .pull-left[
 #Plates and Crust type
@@ -175,11 +175,10 @@ In our data there are four categories:
 -Unknown 
 ]
 
-.pull-right[]
+.pull-right[
 
 #Tectonic Settings
-
-The tectonic setting of a volcano is the movements of the plates that has caused the formation of the given volcano. There are three different tectonic settings in the dataset:
+The tectonic setting is the movement of the plates and mantle that causes the volcano to form, given as the variables:
 
 *Subduction zone:* 
 An oceanic plate moves beneath a continental plate, forming more magma which then forms a volcano on the continental plate
@@ -188,7 +187,7 @@ An oceanic plate moves beneath a continental plate, forming more magma which the
 Two plates move away from each other forming a gap for mantle to move through forming a volcano.
 
 *Intraplate:* 
-A much hotter area of the mantle causes magma to rise to the surface to form a volcano.
+A much hotter area of the mantle causes magma to rise to the surface to form a volcano.]
 ---
 
 # Map eruptions by tectonic plate type
@@ -262,7 +261,7 @@ leaflet(eruption_tecs) %>%
   addCircleMarkers(
     ~longitude, ~latitude,
     radius = 3,
-    #add colour arguement depenant on crust
+    #add colour arguement dependant on crust
     color = ~crust_pal(crust),
     stroke = FALSE, 
     fillOpacity = 0.4
@@ -288,10 +287,13 @@ linear_reg()%>%
 ```{r crust-fit-residuals, echo= FALSE}
 crust_fit_aug <- augment(crust_fit$fit)
 
-ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid, colour = crust)) +
+ggplot(crust_fit_aug, mapping=aes( x=.fitted, y =.resid,
+                                   #colour added to investigate clusters of variables
+                                   colour = crust)) +
 	geom_jitter(alpha=0.8) +
 	geom_hline(yintercept=0, color="gray", lty="dashed" )+ 
 	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals", colour = "Crust type (thickness)")+
+  #Set same colours as shown on maps
   scale_colour_manual(values = c(
     " Continental crust (>25 km)" = "#d73027",
     " Oceanic crust (< 15 km)" = "#4575b4",
@@ -332,11 +334,13 @@ tec_fit <- linear_reg()%>%
 tec_fit_aug <- augment(tec_fit$fit)
 
 ggplot(tec_fit_aug, mapping=aes( x=.fitted, y =.resid, 
+                                 #colour added to investigate clusters of variables
                                  colour = techtonic_setting)) +
 	geom_jitter(alpha=0.8) +
 	geom_hline(yintercept=0, color="gray", lty="dashed" )+
 	labs(x="Predicted Frequency of Volcanic Eruptions", y="Residuals",
 	     colour = "Tectonic Setting")+
+   #Set same colours as shown on maps
     scale_colour_manual(values = c(
     "Intraplate " = "#a50026",
     "Rift zone " = "#313695",
@@ -355,26 +359,29 @@ The adjusted R squared value was 0.01215089, again only accounting for a very sm
 -Visualiations and comparison would answer our research question to the depth we'd initially planned for so general models wouldn't be necessary
 ]
 ---
-# Count on each crust
+# Eruption Frequency on each crust
 
 ```{r viz, echo=FALSE}
 eruption_tecs_fqncy%>%
   group_by(crust)%>%
-  ggplot(aes(y = fct_rev(fct_infreq(crust)), fill = crust))+
+  ggplot(aes(# reorder for more direct comparison
+    y = fct_rev(fct_infreq(crust)), fill = crust))+
   geom_bar()+
   labs(y = "Crust Type (thickness)",
        x = "Eruptions", 
        title = "Frequency of eruptions on different crusts")+
+   #Set same colours as shown on maps
   scale_fill_manual(values = c(
     " Continental crust (>25 km)" = "#d73027",
     " Oceanic crust (< 15 km)" = "#4575b4",
     " Intermediate crust (15-25 km)" = "#fee090"))+
+  #Legend not required
   guides(fill = FALSE)
 ```  
 
 ---
 
-# Count for each tectonic setting
+# Eruption frequency for each tectonic setting
 
 ```{r viz2, echo = FALSE}
 eruption_tecs_fqncy%>%
@@ -384,10 +391,12 @@ eruption_tecs_fqncy%>%
     labs(y = "Tectonic Setting",
        x = "Eruptions", 
        title = "Frequency of eruptions for different tectonic settings")+
+   #Set same colours as shown on maps
   scale_fill_manual(values = c(
     "Intraplate " = "#a50026",
     "Rift zone " = "#313695",
     "Subduction zone " = "#4d9221"))+
+  #Legend not required
   guides(fill = FALSE)
   
 
